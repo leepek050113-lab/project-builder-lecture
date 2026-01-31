@@ -4,8 +4,7 @@
   "description": "A simple steam game review site.",
   "main": "main.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "deploy": "npx wrangler pages deploy . --project-name project-builder-lecture"
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
   "author": "",

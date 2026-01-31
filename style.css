@@ -1,75 +1,110 @@
 :root {
-    --background-color: #1b2838;
-    --header-color: #171a21;
-    --text-color: #c7d5e0;
-    --card-background-color: #2a475e;
-    --accent-color: #66c0f4;
+    --background-color-light: #f4f4f9;
+    --text-color-light: #333;
+    --card-bg-color-light: #fff;
+    --header-bg-color-light: #6c63ff;
+    --header-text-color-light: #fff;
+    --button-bg-color-light: #6c63ff;
+    --button-text-color-light: #fff;
+
+    --background-color-dark: #121212;
+    --text-color-dark: #e0e0e0;
+    --card-bg-color-dark: #1e1e1e;
+    --header-bg-color-dark: #1e1e1e;
+    --header-text-color-dark: #bb86fc;
+    --button-bg-color-dark: #bb86fc;
+    --button-text-color-dark: #121212;
 }
 
 body {
-    background-color: var(--background-color);
-    color: var(--text-color);
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.light-mode {
+    background-color: var(--background-color-light);
+    color: var(--text-color-light);
+}
+
+.dark-mode {
+    background-color: var(--background-color-dark);
+    color: var(--text-color-dark);
 }
 
 header {
-    background-color: var(--header-color);
+    background-color: var(--header-bg-color-light);
+    color: var(--header-text-color-light);
     padding: 1rem;
-    text-align: center;
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
 
-h1 {
-    color: var(--accent-color);
-    margin: 0;
+.dark-mode header {
+    background-color: var(--header-bg-color-dark);
+    color: var(--header-text-color-dark);
 }
 
-main {
-    padding: 1rem;
+.header-controls {
+    display: flex;
+    align-items: center;
 }
 
-.search-container {
-    margin-bottom: 1rem;
-}
-
-#searchInput {
-    width: 100%;
+.language-switcher button {
+    background: none;
+    border: 1px solid var(--header-text-color-light);
+    color: var(--header-text-color-light);
     padding: 0.5rem;
-    background-color: var(--card-background-color);
-    color: var(--text-color);
-    border: 1px solid var(--accent-color);
-    border-radius: 4px;
+    margin: 0 0.5rem;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.dark-mode .language-switcher button {
+    border-color: var(--header-text-color-dark);
+    color: var(--header-text-color-dark);
+}
+
+#theme-switcher {
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+    color: var(--header-text-color-light);
+}
+
+.dark-mode #theme-switcher {
+    color: var(--header-text-color-dark);
 }
 
 .reviews-container {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
     gap: 1rem;
-}
-
-/* Placeholder for game-review-card styling */
-game-review-card {
-    background-color: var(--card-background-color);
-    border-radius: 4px;
     padding: 1rem;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
-.language-switcher button {
-    background-color: var(--accent-color);
-    color: var(--header-color);
-    border: none;
-    padding: 0.5rem 1rem;
+.review-card {
+    background-color: var(--card-bg-color-light);
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 1rem;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.dark-mode .review-card {
+    background-color: var(--card-bg-color-dark);
+    border-color: #333;
+}
+
+.review-card h2 {
+    font-size: 1.5rem;
+    margin-top: 0;
+}
+
+.review-card img {
+    max-width: 100%;
     border-radius: 4px;
-    cursor: pointer;
-    margin-left: 0.5rem;
-}
-
-.language-switcher button.active {
-    background-color: var(--card-background-color);
-    color: var(--accent-color);
 }
