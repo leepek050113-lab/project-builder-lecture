@@ -21,7 +21,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let currentTheme = localStorage.getItem('theme') || 'light';
     let currentLanguage = localStorage.getItem('language') || 'en';
 
-    // --- TRANSLATIONS (Complete) ---
+    // --- TRANSLATIONS (Corrected) ---
     const translations = {
         en: {
             title: 'Steam Game Reviews',
@@ -37,7 +37,7 @@ document.addEventListener('DOMContentLoaded', () => {
             amongUsDesc: "An online and local party game of teamwork and betrayal for 4-15 players...in space!",
             valheimDesc: "A brutal exploration and survival game for 1-10 players, set in a procedurally-generated purgatory inspired by viking culture.",
             terrariaDesc: "Dig, fight, explore, build! Nothing is impossible in this action-packed adventure game. The world is your canvas and the ground itself is your paint.",
-            stardewValleyDesc: "You\'ve inherited your grandfather\'s old farm plot in Stardew Valley. Armed with hand-me-down tools and a few coins, you set out to begin your new life.",
+            stardewValleyDesc: "You've inherited your grandfather's old farm plot in Stardew Valley. Armed with hand-me-down tools and a few coins, you set out to begin your new life.",
             hadesDesc: "Defy the god of the dead as you hack and slash out of the Underworld in this rogue-like dungeon crawler from the creators of Bastion and Transistor.",
             hollowKnightDesc: "Forge your own path in Hollow Knight! An epic action adventure through a vast ruined kingdom of insects and heroes. Explore twisting caverns, battle tainted creatures and befriend bizarre bugs, all in a classic, hand-drawn 2D style.",
             eldenRingDesc: "THE NEW FANTASY ACTION RPG. Rise, Tarnished, and be guided by grace to brandish the power of the Elden Ring and become an Elden Lord in the Lands Between.",
@@ -71,15 +71,15 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     };
 
-    // --- GAME DATA (CORRECTED) ---
+    // --- GAME DATA (Corrected) ---
     const allGames = [
         // FPS & Shooter
         { name: 'Counter-Strike 2', appId: 730, videoId: 'c80_g_m2_RA', tags: ['FPS', 'Shooter', 'Multiplayer', 'Competitive'], descriptionKey: 'cs2Desc' },
         { name: 'Apex Legends', appId: 1172470, videoId: 'o2Wf_1_1y5E', tags: ['Hero Shooter', 'Battle Royale', 'Free to Play'], descriptionKey: 'apexLegendsDesc' },
         { name: 'PUBG: BATTLEGROUNDS', appId: 578080, videoId: '93h9a3_j2j0', tags: ['Battle Royale', 'Shooter', 'Multiplayer'], descriptionKey: 'pubgDesc' },
-        { name: 'Tom Clancy\'s Rainbow Six Siege', appId: 359550, videoId: '6wlvYh0h63k', tags: ['Tactical', 'FPS', 'Multiplayer'] },
+        { name: "Tom Clancy's Rainbow Six Siege", appId: 359550, videoId: '6wlvYh0h63k', tags: ['Tactical', 'FPS', 'Multiplayer'] },
         { name: 'Overwatch 2', appId: 2357570, videoId: 'LGgq2rnb3_g', tags: ['Hero Shooter', 'FPS', 'Free to Play'] },
-        { name: 'Valorant', appId: 2182420, videoId: 'I_7_g_sU_Gk', tags: ['Tactical', 'FPS', 'Free to Play'] }, // CORRECTED: Using a valid placeholder appId
+        { name: 'Valorant', appId: 2182420, videoId: 'I_7_g_sU_Gk', tags: ['Tactical', 'FPS', 'Free to Play'] },
         { name: 'Warframe', appId: 230410, videoId: 'ZxB-aV2s6sU', tags: ['Looter Shooter', 'Action RPG', 'Free to Play'] },
         { name: 'Destiny 2', appId: 1085660, videoId: '8FHe3y_2i_Q', tags: ['Looter Shooter', 'FPS', 'Free to Play'] },
         { name: 'Team Fortress 2', appId: 440, videoId: 'N1_qI-3S_0w', tags: ['Hero Shooter', 'Free to Play', 'Classic'] },
@@ -87,12 +87,11 @@ document.addEventListener('DOMContentLoaded', () => {
         { name: 'Call of Duty: Modern Warfare II', appId: 1938090, videoId: 'r72GP1PIZa0', tags: ['FPS', 'Multiplayer', 'Action'] },
         { name: 'Halo Infinite', appId: 1240440, videoId: '5i_d2_v-iA4', tags: ['FPS', 'Multiplayer', 'Free to Play'] },
         { name: 'Borderlands 3', appId: 397540, videoId: 'd9Gu1PspA3Y', tags: ['Looter Shooter', 'Action RPG', 'Co-op'] },
-        { name: 'Escape from Tarkov', appId: 999999, videoId: 'I_7_g_sU_Gk', tags: ['Hardcore', 'Realistic', 'FPS'] }, // Note: Not on Steam, placeholder appId
+        { name: 'Escape from Tarkov', appId: 999999, videoId: 'I_7_g_sU_Gk', tags: ['Hardcore', 'Realistic', 'FPS'] },
         { name: 'HELLDIVERS 2', appId: 553850, videoId: 'wX-2g_G9Kz4', tags: ['Co-op', 'Shooter', 'Sci-Fi'] },
-
         // RPG
         { name: 'Elden Ring', appId: 1245620, videoId: 'E3Huy2cdih0', tags: ['Souls-like', 'Action RPG', 'Open World'], descriptionKey: 'eldenRingDesc' },
-        { name: 'Baldur\'s Gate 3', appId: 1086940, videoId: '1T22pB-Mi5U', tags: ['CRPG', 'Turn-Based', 'Story Rich'], descriptionKey: 'baldursGate3Desc' },
+        { name: "Baldur's Gate 3", appId: 1086940, videoId: '1T22pB-Mi5U', tags: ['CRPG', 'Turn-Based', 'Story Rich'], descriptionKey: 'baldursGate3Desc' },
         { name: 'The Witcher 3: Wild Hunt', appId: 292030, videoId: 'c0i88t0Kacs', tags: ['Action RPG', 'Open World', 'Story Rich'], descriptionKey: 'witcher3Desc' },
         { name: 'Cyberpunk 2077', appId: 1091500, videoId: '8X2kIfS6fb8', tags: ['Action RPG', 'Open World', 'Sci-Fi'], descriptionKey: 'cyberpunk2077Desc' },
         { name: 'Monster Hunter: World', appId: 582010, videoId: 'Oot_I_t_qHw', tags: ['Action RPG', 'Co-op', 'Hunting'] },
@@ -103,10 +102,9 @@ document.addEventListener('DOMContentLoaded', () => {
         { name: 'Final Fantasy VII Remake Intergrade', appId: 1462040, videoId: 'Z3x-K5_2k_A', tags: ['JRPG', 'Action', 'Story Rich'] },
         { name: 'Divinity: Original Sin 2', appId: 435150, videoId: 'bTWT5Papo0M', tags: ['CRPG', 'Turn-Based', 'Co-op'] },
         { name: 'Nier:Automata', appId: 524220, videoId: 'wNie-c-t52A', tags: ['Action RPG', 'Story Rich', 'Hack and Slash'] },
-
         // Strategy
         { name: 'Dota 2', appId: 570, videoId: '-cSFPIwQp4s', tags: ['MOBA', 'Strategy', 'Free to Play'], descriptionKey: 'dota2Desc' },
-        { name: 'Sid Meier\'s Civilization VI', appId: 289070, videoId: '5KdE0p2z_t4', tags: ['4X', 'Turn-Based Strategy', 'Historical'] },
+        { name: "Sid Meier's Civilization VI", appId: 289070, videoId: '5KdE0p2z_t4', tags: ['4X', 'Turn-Based Strategy', 'Historical'] },
         { name: 'Total War: WARHAMMER III', appId: 1142710, videoId: 'H-XfQp_kY4s', tags: ['Grand Strategy', 'RTS', 'Fantasy'] },
         { name: 'Crusader Kings III', appId: 1158310, videoId: 'xMyG_ZFH9M4', tags: ['Grand Strategy', 'RPG', 'Medieval'] },
         { name: 'Age of Empires IV', appId: 1466860, videoId: 'WAb_g2CUkQM', tags: ['RTS', 'Historical', 'Multiplayer'] },
@@ -115,7 +113,6 @@ document.addEventListener('DOMContentLoaded', () => {
         { name: 'Factorio', appId: 427520, videoId: '9yD_c_kwW3E', tags: ['Automation', 'Base Building', 'Simulation'] },
         { name: 'Slay the Spire', appId: 646570, videoId: 'K2s2n_G_oF4', tags: ['Roguelike', 'Deckbuilder', 'Card Game'] },
         { name: 'Into the Breach', appId: 590380, videoId: 'pp3-h2L_soM', tags: ['Turn-Based Tactics', 'Roguelike', 'Mechs'] },
-
         // Open World & Survival
         { name: 'Grand Theft Auto V', appId: 271590, videoId: 'QkkoHAzjnUs', tags: ['Open World', 'Action', 'Multiplayer'], descriptionKey: 'gta5Desc' },
         { name: 'Red Dead Redemption 2', appId: 1174180, videoId: 'eaW0tYpxLC0', tags: ['Open World', 'Action', 'Story Rich'], descriptionKey: 'rdr2Desc' },
@@ -127,7 +124,6 @@ document.addEventListener('DOMContentLoaded', () => {
         { name: 'Subnautica', appId: 264710, videoId: 'Rz2goPKk5YE', tags: ['Survival', 'Open World', 'Underwater'] },
         { name: 'Dying Light 2 Stay Human', appId: 534380, videoId: '2MD4gTitmzw', tags: ['Zombies', 'Parkour', 'Open World'] },
         { name: 'Palworld', appId: 1623730, videoId: 'W_2quIponmE', tags: ['Survival', 'Creature Collector', 'Open World'] },
-        
         // Indie & Casual
         { name: 'Stardew Valley', appId: 413150, videoId: 'ot7uXNQskhs', tags: ['Farming Sim', 'RPG', 'Life Sim'], descriptionKey: 'stardewValleyDesc' },
         { name: 'Terraria', appId: 105600, videoId: 'w7uOhFTrrq0', tags: ['Sandbox', 'Adventure', '2D'], descriptionKey: 'terrariaDesc' },
