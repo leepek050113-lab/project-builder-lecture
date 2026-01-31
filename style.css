@@ -11,6 +11,7 @@
     --search-focus-border-light: #6c63ff;
     --modal-bg-light: rgba(0,0,0,0.5);
     --modal-content-bg-light: #fff;
+    --hot-section-bg-light: #e9e7ff;
 
     --background-color-dark: #121212;
     --text-color-dark: #e0e0e0;
@@ -24,6 +25,7 @@
     --search-focus-border-dark: #bb86fc;
     --modal-bg-dark: rgba(0,0,0,0.7);
     --modal-content-bg-dark: #2c2c2c;
+    --hot-section-bg-dark: #2a2a3a;
 }
 
 body {
@@ -57,6 +59,73 @@ header {
     background-color: var(--header-bg-color-dark);
     color: var(--header-text-color-dark);
 }
+
+/* Hot Games Section */
+.hot-games-section {
+    background-color: var(--hot-section-bg-light);
+    padding: 2rem;
+    text-align: center;
+}
+
+.dark-mode .hot-games-section {
+    background-color: var(--hot-section-bg-dark);
+}
+
+.hot-games-section h2 {
+    font-size: 2.5rem;
+    margin-bottom: 1.5rem;
+    color: var(--header-bg-color-light);
+}
+
+.dark-mode .hot-games-section h2 {
+    color: var(--header-text-color-dark);
+}
+
+.hot-games-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1.5rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.hot-game-card {
+    background-color: var(--card-bg-color-light);
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    transition: transform 0.3s, box-shadow 0.3s;
+    cursor: pointer;
+    overflow: hidden;
+}
+
+.dark-mode .hot-game-card {
+    background-color: var(--card-bg-color-dark);
+}
+
+.hot-game-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 12px 20px rgba(0,0,0,0.15);
+}
+
+.hot-game-card img {
+    width: 100%;
+    height: 120px;
+    object-fit: cover;
+}
+
+.hot-game-card h3 {
+    font-size: 1.2rem;
+    padding: 1rem;
+    margin: 0;
+}
+
+.search-container {
+    padding: 2rem;
+    display: flex;
+    justify-content: center;
+}
+
+/* Other styles remain the same */
 
 .header-controls {
     display: flex;
@@ -99,12 +168,6 @@ header {
 
 .dark-mode #theme-switcher {
     color: var(--header-text-color-dark);
-}
-
-.search-container {
-    padding: 2rem;
-    display: flex;
-    justify-content: center;
 }
 
 #searchInput {
