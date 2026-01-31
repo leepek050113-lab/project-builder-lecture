@@ -29,7 +29,6 @@ document.addEventListener('DOMContentLoaded', () => {
             searchPlaceholder: 'Search for a game...',
             tags: 'Tags',
             watchTrailer: 'Watch Trailer',
-            // Descriptions
             cs2Desc: "For over two decades, Counter-Strike has offered an elite competitive experience, one shaped by millions of players from across the globe. And now the next chapter in the CS story is about to begin. This is Counter-Strike 2.",
             dota2Desc: "Every day, millions of players worldwide enter battle as one of over a hundred Dota Heroes. And no matter if it's their 10th hour of play or 1,000th, there's always something new to discover.",
             pubgDesc: "Land, loot, and outwit your opponents to become the last player left standing in a thrilling game experience full of unexpected, adrenaline-pumping moments.",
@@ -38,7 +37,7 @@ document.addEventListener('DOMContentLoaded', () => {
             amongUsDesc: "An online and local party game of teamwork and betrayal for 4-15 players...in space!",
             valheimDesc: "A brutal exploration and survival game for 1-10 players, set in a procedurally-generated purgatory inspired by viking culture.",
             terrariaDesc: "Dig, fight, explore, build! Nothing is impossible in this action-packed adventure game. The world is your canvas and the ground itself is your paint.",
-            stardewValleyDesc: "You've inherited your grandfather's old farm plot in Stardew Valley. Armed with hand-me-down tools and a few coins, you set out to begin your new life.",
+            stardewValleyDesc: "You\'ve inherited your grandfather\'s old farm plot in Stardew Valley. Armed with hand-me-down tools and a few coins, you set out to begin your new life.",
             hadesDesc: "Defy the god of the dead as you hack and slash out of the Underworld in this rogue-like dungeon crawler from the creators of Bastion and Transistor.",
             hollowKnightDesc: "Forge your own path in Hollow Knight! An epic action adventure through a vast ruined kingdom of insects and heroes. Explore twisting caverns, battle tainted creatures and befriend bizarre bugs, all in a classic, hand-drawn 2D style.",
             eldenRingDesc: "THE NEW FANTASY ACTION RPG. Rise, Tarnished, and be guided by grace to brandish the power of the Elden Ring and become an Elden Lord in the Lands Between.",
@@ -53,7 +52,6 @@ document.addEventListener('DOMContentLoaded', () => {
             searchPlaceholder: '게임을 검색하세요...',
             tags: '태그',
             watchTrailer: '트레일러 보기',
-            // Descriptions
             cs2Desc: "20년 이상 동안 Counter-Strike는 전 세계 수백만 명의 플레이어들이 만들어낸 최고의 경쟁적인 경험을 제공해왔습니다. 그리고 이제 CS 이야기의 다음 장이 시작됩니다. 이것이 바로 Counter-Strike 2입니다.",
             dota2Desc: "매일 전 세계 수백만 명의 플레이어들이 백여 명이 넘는 도타 영웅 중 하나가 되어 전투에 참여합니다. 10시간을 플레이했든 1,000시간을 플레이했든, 항상 새로운 것을 발견할 수 있습니다.",
             pubgDesc: "예상치 못한 아드레날린 넘치는 순간으로 가득 찬 스릴 넘치는 게임 경험 속에서 마지막까지 살아남기 위해 착륙하고, 아이템을 줍고, 상대를 압도하세요.",
@@ -73,15 +71,15 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     };
 
-    // --- GAME DATA (Complete 250+ List) ---
+    // --- GAME DATA (CORRECTED) ---
     const allGames = [
         // FPS & Shooter
         { name: 'Counter-Strike 2', appId: 730, videoId: 'c80_g_m2_RA', tags: ['FPS', 'Shooter', 'Multiplayer', 'Competitive'], descriptionKey: 'cs2Desc' },
         { name: 'Apex Legends', appId: 1172470, videoId: 'o2Wf_1_1y5E', tags: ['Hero Shooter', 'Battle Royale', 'Free to Play'], descriptionKey: 'apexLegendsDesc' },
         { name: 'PUBG: BATTLEGROUNDS', appId: 578080, videoId: '93h9a3_j2j0', tags: ['Battle Royale', 'Shooter', 'Multiplayer'], descriptionKey: 'pubgDesc' },
-        { name: 'Tom Clancy's Rainbow Six Siege', appId: 359550, videoId: '6wlvYh0h63k', tags: ['Tactical', 'FPS', 'Multiplayer'] },
+        { name: 'Tom Clancy\'s Rainbow Six Siege', appId: 359550, videoId: '6wlvYh0h63k', tags: ['Tactical', 'FPS', 'Multiplayer'] },
         { name: 'Overwatch 2', appId: 2357570, videoId: 'LGgq2rnb3_g', tags: ['Hero Shooter', 'FPS', 'Free to Play'] },
-        { name: 'Valorant', appId: 21 Valorant_is_not_on_steam, videoId: 'I_7_g_sU_Gk', tags: ['Tactical', 'FPS', 'Free to Play'] }, // Note: Not on Steam, but popular
+        { name: 'Valorant', appId: 2182420, videoId: 'I_7_g_sU_Gk', tags: ['Tactical', 'FPS', 'Free to Play'] }, // CORRECTED: Using a valid placeholder appId
         { name: 'Warframe', appId: 230410, videoId: 'ZxB-aV2s6sU', tags: ['Looter Shooter', 'Action RPG', 'Free to Play'] },
         { name: 'Destiny 2', appId: 1085660, videoId: '8FHe3y_2i_Q', tags: ['Looter Shooter', 'FPS', 'Free to Play'] },
         { name: 'Team Fortress 2', appId: 440, videoId: 'N1_qI-3S_0w', tags: ['Hero Shooter', 'Free to Play', 'Classic'] },
@@ -89,12 +87,12 @@ document.addEventListener('DOMContentLoaded', () => {
         { name: 'Call of Duty: Modern Warfare II', appId: 1938090, videoId: 'r72GP1PIZa0', tags: ['FPS', 'Multiplayer', 'Action'] },
         { name: 'Halo Infinite', appId: 1240440, videoId: '5i_d2_v-iA4', tags: ['FPS', 'Multiplayer', 'Free to Play'] },
         { name: 'Borderlands 3', appId: 397540, videoId: 'd9Gu1PspA3Y', tags: ['Looter Shooter', 'Action RPG', 'Co-op'] },
-        { name: 'Escape from Tarkov', appId: 999999, videoId: 'I_7_g_sU_Gk', tags: ['Hardcore', 'Realistic', 'FPS'] }, // Note: Not on Steam
+        { name: 'Escape from Tarkov', appId: 999999, videoId: 'I_7_g_sU_Gk', tags: ['Hardcore', 'Realistic', 'FPS'] }, // Note: Not on Steam, placeholder appId
         { name: 'HELLDIVERS 2', appId: 553850, videoId: 'wX-2g_G9Kz4', tags: ['Co-op', 'Shooter', 'Sci-Fi'] },
 
         // RPG
         { name: 'Elden Ring', appId: 1245620, videoId: 'E3Huy2cdih0', tags: ['Souls-like', 'Action RPG', 'Open World'], descriptionKey: 'eldenRingDesc' },
-        { name: 'Baldur's Gate 3', appId: 1086940, videoId: '1T22pB-Mi5U', tags: ['CRPG', 'Turn-Based', 'Story Rich'], descriptionKey: 'baldursGate3Desc' },
+        { name: 'Baldur\'s Gate 3', appId: 1086940, videoId: '1T22pB-Mi5U', tags: ['CRPG', 'Turn-Based', 'Story Rich'], descriptionKey: 'baldursGate3Desc' },
         { name: 'The Witcher 3: Wild Hunt', appId: 292030, videoId: 'c0i88t0Kacs', tags: ['Action RPG', 'Open World', 'Story Rich'], descriptionKey: 'witcher3Desc' },
         { name: 'Cyberpunk 2077', appId: 1091500, videoId: '8X2kIfS6fb8', tags: ['Action RPG', 'Open World', 'Sci-Fi'], descriptionKey: 'cyberpunk2077Desc' },
         { name: 'Monster Hunter: World', appId: 582010, videoId: 'Oot_I_t_qHw', tags: ['Action RPG', 'Co-op', 'Hunting'] },
@@ -108,7 +106,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Strategy
         { name: 'Dota 2', appId: 570, videoId: '-cSFPIwQp4s', tags: ['MOBA', 'Strategy', 'Free to Play'], descriptionKey: 'dota2Desc' },
-        { name: 'Sid Meier's Civilization VI', appId: 289070, videoId: '5KdE0p2z_t4', tags: ['4X', 'Turn-Based Strategy', 'Historical'] },
+        { name: 'Sid Meier\'s Civilization VI', appId: 289070, videoId: '5KdE0p2z_t4', tags: ['4X', 'Turn-Based Strategy', 'Historical'] },
         { name: 'Total War: WARHAMMER III', appId: 1142710, videoId: 'H-XfQp_kY4s', tags: ['Grand Strategy', 'RTS', 'Fantasy'] },
         { name: 'Crusader Kings III', appId: 1158310, videoId: 'xMyG_ZFH9M4', tags: ['Grand Strategy', 'RPG', 'Medieval'] },
         { name: 'Age of Empires IV', appId: 1466860, videoId: 'WAb_g2CUkQM', tags: ['RTS', 'Historical', 'Multiplayer'] },
@@ -144,8 +142,6 @@ document.addEventListener('DOMContentLoaded', () => {
         { name: 'Dave the Diver', appId: 1868140, videoId: '25y1r-p8b5A', tags: ['Adventure', 'RPG', 'Management'] },
         { name: 'Vampire Survivors', appId: 1794680, videoId: 'O-2_w_nK6jA', tags: ['Bullet Hell', 'Roguelite', 'Action'] },
         { name: 'Deep Rock Galactic', appId: 548430, videoId: '3n_9gO_h5cU', tags: ['Co-op', 'FPS', 'Dwarves'] },
-        
-        // ... and many more to reach over 250!
     ];
     
     let hotGames = [];
@@ -170,7 +166,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             }
         });
-        // Re-render games to update modal descriptions if one is open
         shuffleAndRender(searchInput.value);
     }
 
@@ -206,24 +201,19 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function shuffleAndRender(filter = '') {
-        // Shuffle the entire game list
         for (let i = allGames.length - 1; i > 0; i--) {
             const j = Math.floor(Math.random() * (i + 1));
             [allGames[i], allGames[j]] = [allGames[j], allGames[i]];
         }
 
-        // Apply filter to the shuffled list
         const filteredGames = allGames.filter(g => g.name.toLowerCase().includes(filter.toLowerCase()));
 
-        // Assign hot and main games from the filtered & shuffled list
         hotGames = filteredGames.slice(0, 5);
-        mainGames = filteredGames.slice(5, 105); // Show up to 100 main games
+        mainGames = filteredGames.slice(5, 105);
 
-        // Render Hot Games
         hotGamesContainer.innerHTML = '';
         hotGames.forEach(game => hotGamesContainer.appendChild(createGameCard(game, 'hot')));
 
-        // Render Main Game Reviews
         gameReviewsContainer.innerHTML = '';
         mainGames.forEach(game => gameReviewsContainer.appendChild(createGameCard(game, 'main')));
     }
@@ -244,5 +234,5 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // --- Initial Load ---
     applyTheme(currentTheme);
-    setLanguage(currentLanguage); // This will also trigger the initial shuffleAndRender
+    setLanguage(currentLanguage);
 });
