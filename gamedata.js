@@ -6,15 +6,15 @@ const allGames = [
     { name: 'Apex Legends', appId: 1172470, videoId: 'o2Wf_1_1y5E', tags: ['Hero Shooter', 'Battle Royale', 'Free to Play'], descriptionKey: 'apexLegendsDesc' },
     { name: 'Grand Theft Auto V', appId: 271590, videoId: 'QkkoHAzjnUs', tags: ['Open World', 'Action', 'Multiplayer'], descriptionKey: 'gta5Desc' },
     { name: 'Stardew Valley', appId: 413150, videoId: 'ot7uXNQskhs', tags: ['Farming Sim', 'RPG', 'Life Sim'], descriptionKey: 'stardewValleyDesc' },
-    { name: 'Tom Clancy\'s Rainbow Six Siege', appId: 359550, videoId: '6wlvYh0h63k', tags: ['Tactical', 'FPS', 'Multiplayer'], descriptionKey: 'rainbowSixSiegeDesc' },
+    { name: 'Tom Clancy'''s Rainbow Six Siege', appId: 359550, videoId: '6wlvYh0h63k', tags: ['Tactical', 'FPS', 'Multiplayer'], descriptionKey: 'rainbowSixSiegeDesc' },
     { name: 'Rust', appId: 252490, videoId: 'LGcECozNXEw', tags: ['Survival', 'PvP', 'Multiplayer'], descriptionKey: 'rustDesc' },
     { name: 'Warframe', appId: 230410, videoId: 'ZxB-aV2s6sU', tags: ['Looter Shooter', 'Action RPG', 'Free to Play'], descriptionKey: 'warframeDesc' },
     { name: 'Destiny 2', appId: 1085660, videoId: '8FHe3y_2i_Q', tags: ['Looter Shooter', 'FPS', 'Free to Play'], descriptionKey: 'destiny2Desc' },
     { name: 'Team Fortress 2', appId: 440, videoId: 'N1_qI-3S_0w', tags: ['Hero Shooter', 'Free to Play', 'Classic'], descriptionKey: 'tf2Desc' },
-    { name: 'Sid Meier\'s Civilization VI', appId: 289070, videoId: '5KdE0p2z_t4', tags: ['4X', 'Turn-Based Strategy', 'Historical'], descriptionKey: 'civ6Desc' },
+    { name: 'Sid Meier'''s Civilization VI', appId: 289070, videoId: '5KdE0p2z_t4', tags: ['4X', 'Turn-Based Strategy', 'Historical'], descriptionKey: 'civ6Desc' },
     { name: 'The Witcher 3: Wild Hunt', appId: 292030, videoId: 'c0i88t0Kacs', tags: ['Action RPG', 'Open World', 'Story Rich'], descriptionKey: 'witcher3Desc' },
     { name: 'Terraria', appId: 105600, videoId: 'w7uOhFTrrq0', tags: ['Sandbox', 'Adventure', '2D'], descriptionKey: 'terrariaDesc' },
-    { name: 'Garry\'s Mod', appId: 4000, videoId: 'hpjV962DLws', tags: ['Sandbox', 'Physics', 'Multiplayer'], descriptionKey: 'gmodDesc' },
+    { name: 'Garry'''s Mod', appId: 4000, videoId: 'hpjV962DLws', tags: ['Sandbox', 'Physics', 'Multiplayer'], descriptionKey: 'gmodDesc' },
     { name: 'ARK: Survival Evolved', appId: 346110, videoId: 'aQM8Y-d6qUg', tags: ['Survival', 'Open World', 'Dinosaurs'], descriptionKey: 'arkDesc' },
     { name: 'Fallout 4', appId: 377160, videoId: 'GE2BkLqMef4', tags: ['Open World', 'RPG', 'Post-Apocalyptic'], descriptionKey: 'fallout4Desc' },
     { name: 'The Elder Scrolls V: Skyrim', appId: 489830, videoId: 'JSRtYpNRoN0', tags: ['Open World', 'RPG', 'Singleplayer'], descriptionKey: 'skyrimDesc' },
@@ -23,7 +23,7 @@ const allGames = [
     { name: 'Red Dead Redemption 2', appId: 1174180, videoId: 'eaW0tYpxLC0', tags: ['Open World', 'Action', 'Story Rich'], descriptionKey: 'rdr2Desc' },
     { name: 'Cyberpunk 2077', appId: 1091500, videoId: '8X2kIfS6fb8', tags: ['Action RPG', 'Open World', 'Sci-Fi'], descriptionKey: 'cyberpunk2077Desc' },
     { name: 'Elden Ring', appId: 1245620, videoId: 'E3Huy2cdih0', tags: ['Souls-like', 'Action RPG', 'Open World'], descriptionKey: 'eldenRingDesc' },
-    { name: 'Baldur\'s Gate 3', appId: 1086940, videoId: '1T22pB-Mi5U', tags: ['CRPG', 'Turn-Based', 'Story Rich'], descriptionKey: 'baldursGate3Desc' },
+    { name: 'Baldur'''s Gate 3', appId: 1086940, videoId: '1T22pB-Mi5U', tags: ['CRPG', 'Turn-Based', 'Story Rich'], descriptionKey: 'baldursGate3Desc' },
     { name: 'HELLDIVERS 2', appId: 553850, videoId: 'wX-2g_G9Kz4', tags: ['Co-op', 'Shooter', 'Sci-Fi'], descriptionKey: 'helldivers2Desc' },
     { name: 'Lethal Company', appId: 1966720, videoId: '8v5O2-Lw_I8', tags: ['Co-op', 'Horror', 'Survival'], descriptionKey: 'lethalCompanyDesc' },
     { name: 'Palworld', appId: 1623730, videoId: 'W_2quIponmE', tags: ['Survival', 'Creature Collector', 'Open World'], descriptionKey: 'palworldDesc' },
@@ -34,7 +34,7 @@ const allGames = [
     { name: 'Hollow Knight', appId: 367520, videoId: 'UAO2urG23S4', tags: ['Metroidvania', 'Platformer', 'Indie', 'Souls-like'], descriptionKey: 'hollowKnightDesc' },
     { name: 'Dead by Daylight', appId: 381210, videoId: 'J_uF_OKI_4k', tags: ['Horror', 'Survival', 'Multiplayer', 'Asymmetrical'], descriptionKey: 'deadByDaylightDesc' },
     { name: 'Phasmophobia', appId: 739630, videoId: 'sN2-a4VfT1E', tags: ['Horror', 'Co-op', 'VR', 'Psychological Horror'], descriptionKey: 'phasmophobiaDesc' },
-    { name: 'Don\'t Starve Together', appId: 322330, videoId: 'bV1HcOf_v2A', tags: ['Survival', 'Co-op', 'Crafting', 'Indie'], descriptionKey: 'dontStarveTogetherDesc' },
+    { name: 'Don'''t Starve Together', appId: 322330, videoId: 'bV1HcOf_v2A', tags: ['Survival', 'Co-op', 'Crafting', 'Indie'], descriptionKey: 'dontStarveTogetherDesc' },
     { name: 'Factorio', appId: 427520, videoId: 'KVvXv1Z6rws', tags: ['Automation', 'Base Building', 'Simulation', 'Strategy'], descriptionKey: 'factorioDesc' },
     { name: 'Slay the Spire', appId: 646570, videoId: 'C9wMC-2P04c', tags: ['Deckbuilder', 'Roguelike', 'Card Game', 'Strategy'], descriptionKey: 'slayTheSpireDesc' },
     { name: 'RimWorld', appId: 294100, videoId: '3tDrxO-w_6w', tags: ['Colony Sim', 'Survival', 'Base Building', 'Strategy'], descriptionKey: 'rimworldDesc' },
@@ -52,7 +52,6 @@ const allGames = [
     { name: "Sekiro: Shadows Die Twice", appId: 814380, videoId: 'GRJ_pX3dZkE', tags: ['Action', 'Souls-like', 'Difficult', 'Ninja'], descriptionKey: 'sekiroDesc' },
     { name: "DOOM Eternal", appId: 782330, videoId: 'a_0-b3iV_gI', tags: ['FPS', 'Action', 'Demons', 'Fast-Paced'], descriptionKey: 'doomEternalDesc' },
     { name: "Control", appId: 870780, videoId: 'P4iA52K9fL8', tags: ['Action', 'Supernatural', 'Third Person', 'Metroidvania'], descriptionKey: 'controlDesc' },
-    // ADDING MORE GAMES (BATCH 2)!
     { name: "Deep Rock Galactic", appId: 548430, videoId: 'qhGxenbo4gE', tags: ['Co-op', 'FPS', 'Dwarves', 'Mining'], descriptionKey: 'deepRockGalacticDesc' },
     { name: "Satisfactory", appId: 526870, videoId: 'W_h2V_Atj6c', tags: ['Automation', 'Base Building', 'Open World', 'First-Person'], descriptionKey: 'satisfactoryDesc' },
     { name: "Fallout: New Vegas", appId: 22380, videoId: 'l-x-1KOPZ_A', tags: ['RPG', 'Open World', 'Post-Apocalyptic', 'Story Rich'], descriptionKey: 'falloutNewVegasDesc' },
@@ -63,36 +62,45 @@ const allGames = [
     { name: "Stellaris", appId: 281990, videoId: 'zP9k_F_zABM', tags: ['Grand Strategy', '4X', 'Sci-Fi', 'Space'], descriptionKey: 'stellarisDesc' },
     { name: "Rocket League", appId: 252950, videoId: 'Om-k4g8F-wI', tags: ['Soccer', 'Sports', 'Multiplayer', 'Competitive'], descriptionKey: 'rocketLeagueDesc' },
     { name: "Path of Exile", appId: 238960, videoId: 'G-s-chrd0cI', tags: ['Action RPG', 'Hack and Slash', 'Free to Play', 'Loot'], descriptionKey: 'pathOfExileDesc' },
-    { name: "War Thunder", appId: 236390, videoId: 'pzgO_o_k92k', tags: ['Vehicular Combat', 'WWII', 'Free to Play', 'Simulation'], descriptionKey: 'warThunderDesc' }
+    { name: "War Thunder", appId: 236390, videoId: 'pzgO_o_k92k', tags: ['Vehicular Combat', 'WWII', 'Free to Play', 'Simulation'], descriptionKey: 'warThunderDesc' },
+    // ADDING MORE GAMES (BATCH 3)!
+    { name: "Mount & Blade II: Bannerlord", appId: 261550, videoId: 'hXvG7Jg21p0', tags: ['RPG', 'Strategy', 'Sandbox', 'Medieval'], descriptionKey: 'bannerlordDesc' },
+    { name: "Crusader Kings III", appId: 1158310, videoId: 'xMy_t2I9T7U', tags: ['Grand Strategy', 'RPG', 'Medieval', 'Simulation'], descriptionKey: 'ck3Desc' },
+    { name: "Divinity: Original Sin 2", appId: 435150, videoId: 'bTWT5_g2c1I', tags: ['CRPG', 'Turn-Based', 'Fantasy', 'Co-op'], descriptionKey: 'divinity2Desc' },
+    { name: "Planet Zoo", appId: 703080, videoId: '1IGaB9tQo9w', tags: ['Simulation', 'Building', 'Management', 'Sandbox'], descriptionKey: 'planetZooDesc' },
+    { name: "Frostpunk", appId: 323190, videoId: 'qqEpSOFDXGA', tags: ['City Builder', 'Survival', 'Strategy', 'Post-Apocalyptic'], descriptionKey: 'frostpunkDesc' },
+    { name: "Celeste", appId: 504230, videoId: 'o_1-YZJ1T2A', tags: ['Platformer', 'Pixel Graphics', 'Indie', 'Difficult'], descriptionKey: 'celesteDesc' },
+    { name: "Undertale", appId: 391540, videoId: '1Hojv0m3TqA', tags: ['RPG', 'Story Rich', 'Pixel Graphics', 'Indie'], descriptionKey: 'undertaleDesc' },
+    { name: "Disco Elysium", appId: 632470, videoId: 'St_A_of43pY', tags: ['RPG', 'Detective', 'Story Rich', 'Noir'], descriptionKey: 'discoElysiumDesc' },
+    { name: "Outer Wilds", appId: 753640, videoId: '4kYtnJ5vR3U', tags: ['Exploration', 'Mystery', 'Space', 'Puzzle'], descriptionKey: 'outerWildsDesc' },
+    { name: "Risk of Rain 2", appId: 632360, videoId: 'a_yC0Qz_O8s', tags: ['Action Roguelike', 'Third-Person Shooter', 'Co-op', 'Looter Shooter'], descriptionKey: 'riskOfRain2Desc' }
 ];
 
 const translations = {
     en: {
         // ... (existing descriptions) ...
-        deepRockGalacticDesc: "Deep Rock Galactic is a 1-4 player co-op FPS featuring badass space Dwarves, 100% destructible environments, procedurally-generated caves, and endless hordes of alien monsters.",
-        satisfactoryDesc: "Satisfactory is a first-person open-world factory building game with a dash of exploration and combat. Play alone or with friends, explore an alien planet, create multi-story factories, and enter conveyor belt heaven!",
-        falloutNewVegasDesc: "Welcome to Vegas. New Vegas. It’s the kind of town where you dig your own grave prior to being shot in the head and left for dead…and that’s before things really get ugly.",
-        oblivionDesc: "The Elder Scrolls IV: Oblivion® Game of the Year Edition presents one of the best RPGs of all time like never before. Step inside the most richly detailed and vibrant game-world ever created. With a powerful combination of freeform gameplay and unprecedented graphics, you can unravel the main quest at your own pace or explore the vast world and find your own challenges.",
-        borderlands2Desc: "A new era of shoot and loot is about to begin. Play as one of four new vault hunters facing off against a massive new world of creatures, psychos and the evil mastermind, Handsome Jack.",
-        xcom2Desc: "XCOM 2 is the sequel to XCOM: Enemy Unknown, the 2012 award-winning strategy game of the year. Earth has changed and is now under alien rule. Facing impossible odds you must rebuild XCOM, and ignite a global resistance to reclaim our world and save humanity.",
-        totalWarhammer2Desc: "Strategy gaming perfected. A breath-taking campaign of exploration, expansion and conquest across a fantasy world. Turn-based civilisation management and real-time epic strategy battles with thousands of troops and monsters at your command.",
-        stellarisDesc: "Explore a galaxy full of wonders in this sci-fi grand strategy game from Paradox Development Studios. Interact with diverse alien races, discover strange new worlds with unexpected events and expand the reach of your empire. Each new adventure holds almost limitless possibilities.",
-        rocketLeagueDesc: "Rocket League is a high-powered hybrid of arcade-style soccer and vehicular mayhem with easy-to-understand controls and fluid, physics-driven competition.",
-        pathOfExileDesc: "You are an Exile, struggling to survive on the dark continent of Wraeclast, as you fight to earn power that will allow you to exact your revenge against those who wronged you. Created by hardcore gamers, Path of Exile is an online Action RPG set in a dark fantasy world.",
-        warThunderDesc: "War Thunder is the most comprehensive free-to-play, cross-platform, MMO military game for Windows, Linux, Mac, PlayStation®4, PlayStation®5, Xbox One and Xbox Series X|S dedicated to aviation, armoured vehicles, and naval craft from the early 20th century to the most advanced modern combat units."
+        bannerlordDesc: "The horns sound, the ravens gather. An empire is torn by civil war. Beyond its borders, new kingdoms rise. Gird on your sword, don your armour, summon your followers and ride forth to win glory on the battlefields of Calradia. Establish your hegemony and create a new world out of the ashes of the old.",
+        ck3Desc: "Love, fight, scheme, and claim greatness. Determine your noble house’s legacy in the sprawling grand strategy of Crusader Kings III. Death is only the beginning as you guide your dynasty’s lineage in the rich and larger-than-life simulation of the Middle Ages.",
+        divinity2Desc: "The critically acclaimed RPG that raised the bar, from the creators of Baldur's Gate 3. Master deep, tactical combat. Venture as a party of up to four - but know that only one of you will have the chance to become a God.",
+        planetZooDesc: "Build a world for wildlife in Planet Zoo. From the developers of Planet Coaster and Zoo Tycoon comes the ultimate zoo sim. Construct detailed habitats, manage your zoo, and meet authentic living animals who think, feel and explore the world you create around them.",
+        frostpunkDesc: "Frostpunk is the first society survival game. As the ruler of the last city on Earth, it is your duty to manage both its citizens and its infrastructure. What decisions will you make to ensure your society's survival? What will you do when pushed to the limit?",
+        celesteDesc: "Help Madeline survive her inner demons on her journey to the top of Celeste Mountain, in this super-tight, hand-crafted platformer from the creators of TowerFall.",
+        undertaleDesc: "UNDERTALE! The RPG game where you don't have to destroy anyone.",
+        discoElysiumDesc: "Disco Elysium - The Final Cut is a groundbreaking role playing game. You’re a detective with a unique skill system at your disposal and a whole city block to carve your path across. Interrogate unforgettable characters, crack murders or take bribes.",
+        outerWildsDesc: "Named Game of the Year 2019 by Giant Bomb, Polygon, Eurogamer, and The Guardian, Outer Wilds is a critically-acclaimed and award-winning open world mystery about a solar system trapped in an endless time loop.",
+        riskOfRain2Desc: "Escape a chaotic alien planet by fighting through hordes of frenzied monsters – with your friends, or on your own. Combine loot in surprising ways and master each character until you become the havoc you feared upon your first crash landing."
     },
     ko: {
         // ... (existing descriptions) ...
-        deepRockGalacticDesc: "Deep Rock Galactic은 1-4인용 협동 FPS로, 멋진 우주 드워프, 100% 파괴 가능한 환경, 절차적으로 생성된 동굴, 끝없는 외계 괴물 무리가 특징입니다.",
-        satisfactoryDesc: "Satisfactory는 탐험과 전투가 가미된 1인칭 오픈 월드 공장 건설 게임입니다. 혼자 또는 친구와 함께 플레이하고, 외계 행성을 탐험하고, 다층 공장을 만들고, 컨베이어 벨트 천국에 들어가세요!",
-        falloutNewVegasDesc: "베가스에 오신 것을 환영합니다. 뉴 베가스. 머리에 총을 맞고 죽기 전에 자신의 무덤을 파는 그런 도시입니다... 그리고 상황이 정말 험악해지기 전입니다.",
-        oblivionDesc: "The Elder Scrolls IV: Oblivion® Game of the Year Edition은 역사상 최고의 RPG 중 하나를 이전과는 다른 방식으로 선보입니다. 지금까지 만들어진 게임 세계 중 가장 풍부하고 상세하며 활기찬 게임 세계로 들어가십시오. 자유로운 게임 플레이와 전례 없는 그래픽의 강력한 조합으로 자신의 속도에 맞춰 메인 퀘스트를 풀거나 광대한 세계를 탐험하고 자신만의 도전을 찾을 수 있습니다.",
-        borderlands2Desc: "새로운 시대의 총격과 약탈이 시작됩니다. 네 명의 새로운 볼트 헌터 중 한 명이 되어 거대한 새로운 생물, 사이코, 사악한 주모자인 핸섬 잭의 세계에 맞서십시오.",
-        xcom2Desc: "XCOM 2는 2012년 올해의 수상 경력에 빛나는 전략 게임인 XCOM: Enemy Unknown의 속편입니다. 지구는 변했고 지금은 외계인의 지배를 받고 있습니다. 불가능한 역경에 맞서 XCOM을 재건하고, 세계를 되찾고 인류를 구하기 위한 세계적인 저항을 일으켜야 합니다.",
-        totalWarhammer2Desc: "완벽한 전략 게임. 판타지 세계를 가로지르는 숨막히는 탐험, 확장, 정복의 캠페인. 턴 기반 문명 관리와 수천 명의 군대와 괴물을 지휘하는 실시간 장대한 전략 전투.",
-        stellarisDesc: "Paradox Development Studios의 이 SF 대전략 게임에서 경이로움으로 가득 찬 은하계를 탐험하세요. 다양한 외계 종족과 상호 작용하고, 예상치 못한 사건이 있는 이상한 새로운 세계를 발견하고, 제국의 범위를 확장하세요. 각각의 새로운 모험은 거의 무한한 가능성을 가지고 있습니다.",
-        rocketLeagueDesc: "Rocket League는 이해하기 쉬운 컨트롤과 유동적이고 물리 기반 경쟁을 갖춘 아케이드 스타일 축구와 차량 대혼란의 강력한 하이브리드입니다.",
-        pathOfExileDesc: "당신은 어둠의 대륙 레이클라스트에서 생존하기 위해 고군분투하는 추방자이며, 당신에게 잘못한 자들에게 복수할 수 있는 힘을 얻기 위해 싸웁니다. 하드코어 게이머들이 만든 Path of Exile은 어두운 판타지 세계를 배경으로 하는 온라인 액션 RPG입니다.",
-        warThunderDesc: "War Thunder는 20세기 초부터 가장 진보된 현대 전투 부대에 이르기까지 항공, 장갑차, 해군 함정에 전념하는 Windows, Linux, Mac, PlayStation®4, PlayStation®5, Xbox One 및 Xbox Series X|S를 위한 가장 포괄적인 무료 플레이, 크로스 플랫폼, MMO 군사 게임입니다."
+        bannerlordDesc: "뿔나팔 소리가 울리고 까마귀들이 모여듭니다. 제국은 내전으로 찢어졌습니다. 국경 너머에는 새로운 왕국이 세워집니다. 칼을 차고 갑옷을 입고 추종자들을 소환하여 칼라디아의 전장에서 영광을 쟁취하기 위해 말을 타십시오. 패권을 확립하고 낡은 것의 잿더미에서 새로운 세계를 만드십시오.",
+        ck3Desc: "사랑하고, 싸우고, 계략을 꾸미고, 위대함을 주장하십시오. Crusader Kings III의 광활한 대전략에서 당신의 귀족 가문의 유산을 결정하십시오. 죽음은 중세의 풍부하고 실제보다 더 큰 시뮬레이션에서 왕조의 혈통을 안내하는 시작에 불과합니다.",
+        divinity2Desc: "Baldur's Gate 3의 제작진이 만든, 기준을 높인 비평가들의 극찬을 받은 RPG. 깊이 있고 전술적인 전투를 마스터하십시오. 최대 4명의 파티로 모험을 떠나십시오. 하지만 오직 한 명만이 신이 될 기회를 갖게 될 것임을 알아두십시오.",
+        planetZooDesc: "Planet Zoo에서 야생 동물을 위한 세계를 건설하세요. Planet Coaster 및 Zoo Tycoon의 개발자가 만든 최고의 동물원 시뮬레이션입니다. 상세한 서식지를 건설하고, 동물원을 관리하고, 주변에 만든 세상을 생각하고, 느끼고, 탐험하는 실제 살아있는 동물을 만나보세요.",
+        frostpunkDesc: "Frostpunk는 최초의 사회 생존 게임입니다. 지구상 마지막 도시의 통치자로서 시민과 기반 시설을 모두 관리하는 것이 당신의 의무입니다. 사회의 생존을 보장하기 위해 어떤 결정을 내리시겠습니까? 한계에 부딪혔을 때 당신은 무엇을 할 것입니까?",
+        celesteDesc: "TowerFall 제작진이 만든 이 매우 타이트하고 수작업으로 제작된 플랫폼 게임에서 Madeline이 Celeste 산 정상으로 가는 여정에서 내면의 악마를 이겨내도록 도와주세요.",
+        undertaleDesc: "UNDERTALE! 아무도 파괴할 필요가 없는 RPG 게임입니다.",
+        discoElysiumDesc: "Disco Elysium - The Final Cut은 획기적인 롤플레잉 게임입니다. 당신은 독특한 기술 시스템을 마음대로 사용할 수 있는 형사이며, 길을 개척할 도시 구역 전체가 있습니다. 잊을 수 없는 캐릭터를 심문하고, 살인 사건을 해결하거나, 뇌물을 받으십시오.",
+        outerWildsDesc: "Giant Bomb, Polygon, Eurogamer, The Guardian에서 2019년 올해의 게임으로 선정된 Outer Wilds는 끝없는 시간 루프에 갇힌 태양계에 대한 비평가들의 극찬을 받고 수상 경력에 빛나는 오픈 월드 미스터리입니다.",
+        riskOfRain2Desc: "친구와 함께 또는 혼자서 광란의 괴물 무리를 헤치고 싸워 혼돈의 외계 행성에서 탈출하십시오. 놀라운 방식으로 전리품을 결합하고 첫 번째 추락 착륙 시 두려워했던 대혼란이 될 때까지 각 캐릭터를 마스터하십시오."
     }
 }
