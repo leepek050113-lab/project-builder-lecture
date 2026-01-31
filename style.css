@@ -41,13 +41,13 @@ h1 {
     font-weight: 700;
 }
 
-.controls {
+.header-controls {
     display: flex;
     align-items: center;
     gap: 15px;
 }
 
-#theme-switcher, .lang-btn, #refresh-button {
+#theme-switcher, .language-switcher button, #refresh-button {
     background: none;
     border: 1px solid #ccc;
     border-radius: 5px;
@@ -61,28 +61,31 @@ h1 {
     font-size: 1.5em; /* Make refresh icon bigger */
 }
 
-.lang-btn {
+.language-switcher button {
     font-size: 1em;
     padding: 8px 12px;
 }
 
-.dark-mode #theme-switcher, .dark-mode .lang-btn, .dark-mode #refresh-button {
+.dark-mode #theme-switcher, .dark-mode .language-switcher button, .dark-mode #refresh-button {
     border-color: #555;
 }
 
-#theme-switcher:hover, .lang-btn:hover, #refresh-button:hover {
+#theme-switcher:hover, .language-switcher button:hover, #refresh-button:hover {
     transform: scale(1.1);
     background-color: rgba(0,0,0,0.1);
 }
 
-.dark-mode #theme-switcher:hover, .dark-mode .lang-btn:hover, .dark-mode #refresh-button:hover {
+.dark-mode #theme-switcher:hover, .dark-mode .language-switcher button:hover, .dark-mode #refresh-button:hover {
     background-color: rgba(255,255,255,0.1);
 }
 
 /* --- Search --- */
 .search-container {
-    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     margin: 30px 0;
+    gap: 10px;
 }
 
 input[type="text"] {
@@ -107,17 +110,29 @@ h2 {
     border-bottom-color: #333;
 }
 
-/* --- Hot Games Carousel --- */
-.hot-games-carousel {
-    overflow-x: auto;
+/* --- Hot Games Container (Carousel) --- */
+.hot-games-container {
     display: flex;
+    overflow-x: auto;
     gap: 15px;
-    padding-bottom: 15px; /* For scrollbar */
-    scrollbar-width: thin;
+    padding: 10px 0;
+    scrollbar-width: thin; /* For Firefox */
 }
 
+.hot-games-container::-webkit-scrollbar {
+    height: 8px;
+}
+.hot-games-container::-webkit-scrollbar-thumb {
+    background-color: #ccc;
+    border-radius: 4px;
+}
+.dark-mode .hot-games-container::-webkit-scrollbar-thumb {
+    background-color: #555;
+}
+
+
 .hot-game-card {
-    flex: 0 0 220px; /* Fixed width for carousel items */
+    flex: 0 0 200px; /* Reduced width */
     border: 1px solid #ddd;
     border-radius: 8px;
     overflow: hidden;
@@ -133,12 +148,12 @@ h2 {
 
 .hot-game-card img {
     width: 100%;
-    height: 100px;
+    height: 94px; /* Reduced height */
     object-fit: cover;
 }
 
 .hot-game-card h3 {
-    font-size: 1.1em;
+    font-size: 1em;
     margin: 10px;
     white-space: nowrap;
     overflow: hidden;
@@ -146,9 +161,9 @@ h2 {
 }
 
 /* --- Game Reviews Grid --- */
-.game-reviews-grid {
+.reviews-container {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); /* Reduced min-width */
     gap: 20px;
 }
 
@@ -168,12 +183,12 @@ h2 {
 
 .review-card img {
     width: 100%;
-    height: 120px;
+    height: 103px; /* Reduced height */
     object-fit: cover;
 }
 
 .review-card h3 {
-    font-size: 1.2em;
+    font-size: 1.1em;
     margin: 10px 15px;
 }
 
@@ -223,7 +238,7 @@ h2 {
     font-size: 2em;
 }
 
-#modal-game-tags .tag {
+.modal-tags-container .tag {
     display: inline-block;
     background-color: #e0e0e0;
     color: #333;
@@ -233,12 +248,12 @@ h2 {
     font-size: 0.9em;
 }
 
-.dark-mode #modal-game-tags .tag {
+.dark-mode .modal-tags-container .tag {
     background-color: #555;
     color: #f0f0f0;
 }
 
-#modal-video-link {
+.video-link-button {
     display: inline-block;
     margin-top: 20px;
     padding: 10px 20px;
@@ -250,7 +265,7 @@ h2 {
     transition: background-color 0.2s;
 }
 
-#modal-video-link:hover {
+.video-link-button:hover {
     background-color: #e03e00;
 }
 
