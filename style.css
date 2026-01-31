@@ -4,8 +4,6 @@
     --card-bg-color-light: #fff;
     --header-bg-color-light: #6c63ff;
     --header-text-color-light: #fff;
-    --button-bg-color-light: #6c63ff;
-    --button-text-color-light: #fff;
     --search-bg-light: #fff;
     --search-border-light: #ccc;
     --search-focus-border-light: #6c63ff;
@@ -14,14 +12,14 @@
     --hot-section-bg-light: #e9e7ff;
     --tag-bg-light: #e0e0e0;
     --tag-text-light: #333;
+    --video-button-bg: #ff0000;
+    --video-button-text: #fff;
 
     --background-color-dark: #121212;
     --text-color-dark: #e0e0e0;
     --card-bg-color-dark: #1e1e1e;
     --header-bg-color-dark: #1e1e1e;
     --header-text-color-dark: #bb86fc;
-    --button-bg-color-dark: #bb86fc;
-    --button-text-color-dark: #121212;
     --search-bg-dark: #2c2c2c;
     --search-border-dark: #555;
     --search-focus-border-dark: #bb86fc;
@@ -39,15 +37,17 @@ body {
     transition: background-color 0.3s, color 0.3s;
 }
 
-.light-mode {
-    background-color: var(--background-color-light);
-    color: var(--text-color-light);
-}
-
-.dark-mode {
-    background-color: var(--background-color-dark);
-    color: var(--text-color-dark);
-}
+/* Theme Modes */
+.light-mode { background-color: var(--background-color-light); color: var(--text-color-light); }
+.dark-mode { background-color: var(--background-color-dark); color: var(--text-color-dark); }
+.dark-mode header { background-color: var(--header-bg-color-dark); color: var(--header-text-color-dark); }
+.dark-mode .hot-games-section { background-color: var(--hot-section-bg-dark); }
+.dark-mode .hot-games-section h2 { color: var(--header-text-color-dark); }
+.dark-mode .hot-game-card, .dark-mode .review-card { background-color: var(--card-bg-color-dark); }
+.dark-mode #searchInput { border-color: var(--search-border-dark); background-color: var(--search-bg-dark); color: var(--text-color-dark); }
+.dark-mode .modal { background-color: var(--modal-bg-dark); }
+.dark-mode .modal-content { background-color: var(--modal-content-bg-dark); }
+.dark-mode .tag { background-color: var(--tag-bg-dark); color: var(--tag-text-dark); }
 
 header {
     background-color: var(--header-bg-color-light);
@@ -59,29 +59,12 @@ header {
     box-shadow: 0 2px 5px rgba(0,0,0,0.1);
 }
 
-.dark-mode header {
-    background-color: var(--header-bg-color-dark);
-    color: var(--header-text-color-dark);
-}
-
-.hot-games-section {
-    background-color: var(--hot-section-bg-light);
-    padding: 2rem;
-    text-align: center;
-}
-
-.dark-mode .hot-games-section {
-    background-color: var(--hot-section-bg-dark);
-}
-
-.hot-games-section h2 {
-    font-size: 2.5rem;
-    margin-bottom: 1.5rem;
-    color: var(--header-bg-color-light);
-}
-
-.dark-mode .hot-games-section h2 {
-    color: var(--header-text-color-dark);
+/* Layout for Game Cards */
+.reviews-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1.5rem;
+    padding: 0 2rem 2rem;
 }
 
 .hot-games-container {
@@ -92,7 +75,7 @@ header {
     margin: 0 auto;
 }
 
-.hot-game-card {
+.review-card, .hot-game-card {
     background-color: var(--card-bg-color-light);
     border-radius: 12px;
     box-shadow: 0 4px 10px rgba(0,0,0,0.1);
@@ -101,95 +84,68 @@ header {
     overflow: hidden;
 }
 
-.dark-mode .hot-game-card {
-    background-color: var(--card-bg-color-dark);
-}
-
-.hot-game-card:hover {
+.review-card:hover, .hot-game-card:hover {
     transform: translateY(-8px);
     box-shadow: 0 12px 20px rgba(0,0,0,0.15);
 }
 
-.hot-game-card img {
+.review-card img, .hot-game-card img {
     width: 100%;
-    height: 120px;
     object-fit: cover;
+    display: block;
 }
 
-.hot-game-card h3 {
-    font-size: 1.2rem;
+.review-card img { height: 170px; }
+.hot-game-card img { height: 120px; }
+
+.review-card-content h2, .hot-game-card h3 {
     padding: 1rem;
     margin: 0;
+    font-size: 1.2rem;
 }
 
-.search-container {
+.hot-games-section {
+    background-color: var(--hot-section-bg-light);
     padding: 2rem;
-    display: flex;
-    justify-content: center;
+    text-align: center;
 }
-
-/* ... (other styles) ... */
 
 /* Modal Styles */
 .modal {
     display: none;
     position: fixed;
     z-index: 1000;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
+    left: 0; top: 0;
+    width: 100%; height: 100%;
     overflow: auto;
     background-color: var(--modal-bg-light);
 }
 
-.dark-mode .modal {
-    background-color: var(--modal-bg-dark);
-}
-
 .modal-content {
     background-color: var(--modal-content-bg-light);
-    margin: 5% auto;
+    margin: 8% auto;
     padding: 2rem;
     border-radius: 12px;
-    max-width: 800px;
+    max-width: 600px;
     position: relative;
     box-shadow: 0 5px 15px rgba(0,0,0,0.3);
     animation: fadeIn 0.3s;
 }
 
-.dark-mode .modal-content {
-    background-color: var(--modal-content-bg-dark);
-}
+@keyframes fadeIn { from {opacity: 0;} to {opacity: 1;} }
 
 .close-button {
     color: #aaa;
     position: absolute;
-    top: 1rem;
-    right: 1.5rem;
+    top: 1rem; right: 1.5rem;
     font-size: 28px;
     font-weight: bold;
     cursor: pointer;
 }
 
-.modal-video-container {
-    position: relative;
-    width: 100%;
-    padding-bottom: 56.25%; /* 16:9 aspect ratio */
-    margin-bottom: 1.5rem;
-}
-
-.modal-video-container iframe {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    border-radius: 8px;
-}
-
 .modal-content h2 {
-    font-size: 2.2rem;
+    font-size: 2rem;
+    margin-top: 0;
     margin-bottom: 1rem;
 }
 
@@ -208,7 +164,26 @@ header {
     font-size: 0.9rem;
 }
 
-.dark-mode .tag {
-    background-color: var(--tag-bg-dark);
-    color: var(--tag-text-dark);
+.video-link-button {
+    display: inline-block;
+    background-color: var(--video-button-bg);
+    color: var(--video-button-text);
+    padding: 10px 20px;
+    text-decoration: none;
+    border-radius: 5px;
+    font-weight: bold;
+    margin: 1rem 0;
+    transition: background-color 0.2s;
+    text-align: center;
 }
+
+.video-link-button:hover {
+    background-color: #cc0000;
+}
+
+/* Other styles like search, header controls etc. */
+.header-controls { display: flex; align-items: center; }
+.language-switcher button { background: none; border: 1px solid; padding: 0.5rem 1rem; margin: 0 0.5rem; cursor: pointer; border-radius: 20px; }
+#theme-switcher { background: none; border: none; font-size: 1.8rem; cursor: pointer; }
+#searchInput { width: 60%; max-width: 600px; padding: 1rem; font-size: 1.2rem; border-radius: 30px; border: 1px solid var(--search-border-light); }
+.search-container { padding: 2rem; display: flex; justify-content: center; }

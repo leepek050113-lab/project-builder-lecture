@@ -20,32 +20,24 @@
     <main>
         <section class="hot-games-section">
             <h2 data-lang-key="hotGamesTitle">🔥 Hot Right Now</h2>
-            <div id="hotGamesContainer" class="hot-games-container">
-                <!-- Hot game cards will be inserted here -->
-            </div>
+            <div id="hotGamesContainer" class="hot-games-container"></div>
         </section>
 
         <div class="search-container">
             <input type="text" id="searchInput" data-lang-key="searchPlaceholder" placeholder="Search for a game...">
         </div>
         
-        <div id="gameReviews" class="reviews-container">
-            <!-- Game review cards will be inserted here -->
-        </div>
+        <div id="gameReviews" class="reviews-container"></div>
     </main>
 
     <!-- Game Detail Modal -->
     <div id="game-modal" class="modal">
         <div class="modal-content">
             <span class="close-button">&times;</span>
-            <div class="modal-video-container">
-                <iframe id="modal-game-video" width="560" height="315" src="" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-            </div>
             <h2 id="modal-game-title"></h2>
-            <div class="modal-tags-container" id="modal-game-tags">
-                <!-- Tags will be inserted here -->
-            </div>
+            <div class="modal-tags-container" id="modal-game-tags"></div>
             <p id="modal-game-description"></p>
+            <a id="modal-video-link" class="video-link-button" href="#" target="_blank" data-lang-key="watchTrailer">Watch Trailer</a>
         </div>
     </div>
 
