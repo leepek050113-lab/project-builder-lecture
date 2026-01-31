@@ -10,30 +10,27 @@ A web application that allows users to browse and search for Steam game reviews.
 *   Displays a list of games from a predefined dataset.
 *   Separates games into a "Hot Right Now" carousel and a main grid.
 *   Allows users to switch between Light and Dark themes.
-*   Supports English and Korean languages.
+*   Supports English and Korean languages with full descriptions for all games.
 *   Features a search bar to filter games by name.
 *   Clicking a game card opens a modal with details (Title, Tags, Description, Video Trailer link).
-*   A refresh button to shuffle the main list of games.
+*   A refresh button to shuffle the main list of games, while the "Hot" section remains static.
 
 ### Design & Style
 *   Modern, clean user interface.
-*   Responsive layout that adapts to different screen sizes.
+*   Responsive layout with appropriately sized game cards.
 *   Visual distinction between light and dark modes.
 *   Interactive elements with hover effects.
-*   Reduced card sizes for a more compact view.
 
 ## Development Plan (Current Request)
 
-### 1. Add Missing Game Descriptions
-*   **Goal:** Ensure every game in the database has a descriptive text available in the modal.
+### 1. Implement 10-Minute "Hot Games" Auto-Refresh
+*   **Goal:** Automatically update the "Hot Right Now" section every 10 minutes to keep content fresh and dynamic.
 *   **Action:**
-    *   Write compelling descriptions for all games currently lacking one.
-    *   Add these descriptions to the `translations` object in `main.js` for both English and Korean.
-    *   Update the `allGames` array to link each game to its corresponding description key.
-
-### 2. Fix Refresh Logic
-*   **Goal:** Prevent the "Hot Right Now" section from changing when the user clicks the refresh button.
-*   **Action:**
-    *   Refactor the JavaScript logic in `main.js`.
-    *   On initial page load, shuffle the list and select the "Hot" games. These will remain fixed.
-    *   The refresh button will now only shuffle and re-render the *main* list of games, leaving the "Hot" section untouched.
+    *   Add a visual 10-minute countdown timer next to the "Hot Right Now" title in `index.html`.
+    *   Apply styling to the timer in `style.css` for better visual integration.
+    *   In `main.js`, create a countdown function that updates the timer display every second.
+    *   When the timer reaches `00:00`, the application will automatically:
+        1.  Re-shuffle the entire list of games.
+        2.  Select 10 new games for the "Hot Right Now" section.
+        3.  Update the main game grid with the remaining games.
+        4.  Reset the timer back to 10 minutes and start the countdown again.

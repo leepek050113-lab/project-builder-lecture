@@ -1,4 +1,3 @@
-
 document.addEventListener('DOMContentLoaded', () => {
     // --- UI Elements ---
     const themeSwitcher = document.getElementById('theme-switcher');
@@ -10,6 +9,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const modal = document.getElementById('game-modal');
     const closeModalBtn = document.querySelector('.close-button');
     const refreshButton = document.getElementById('refresh-button');
+    const hotGamesTimer = document.getElementById('hot-games-timer');
 
     // --- Modal UI ---
     const modalTitle = document.getElementById('modal-game-title');
@@ -22,8 +22,9 @@ document.addEventListener('DOMContentLoaded', () => {
     let currentLanguage = localStorage.getItem('language') || 'en';
     let hotGames = [];
     let mainGames = [];
+    let timerInterval;
 
-    // --- TRANSLATIONS (Now with all descriptions!) ---
+    // --- TRANSLATIONS (Omitted for brevity, but they are all still here) ---
     const translations = {
         en: {
             title: 'Steam Game Reviews',
@@ -96,9 +97,9 @@ document.addEventListener('DOMContentLoaded', () => {
             witcher3Desc: "당신은 용병 몬스터 사냥꾼인 리비아의 게롤트입니다. 당신 앞에는 마음대로 탐험할 수 있는 전쟁으로 폐허가 되고 괴물들이 들끓는 대륙이 있습니다. 현재 계약은? 예언의 아이, 시리를 추적하는 것입니다."
         }
     };
-
-    // --- GAME DATA (All games linked to a description) ---
-    const allGames = [
+    
+    // --- GAME DATA (Omitted for brevity) ---
+        const allGames = [
         { name: 'Counter-Strike 2', appId: 730, videoId: 'c80_g_m2_RA', tags: ['FPS', 'Shooter', 'Multiplayer', 'Competitive'], descriptionKey: 'cs2Desc' },
         { name: 'Dota 2', appId: 570, videoId: '-cSFPIwQp4s', tags: ['MOBA', 'Strategy', 'Free to Play'], descriptionKey: 'dota2Desc' },
         { name: 'PUBG: BATTLEGROUNDS', appId: 578080, videoId: '93h9a3_j2j0', tags: ['Battle Royale', 'Shooter', 'Multiplayer'], descriptionKey: 'pubgDesc' },
@@ -127,7 +128,7 @@ document.addEventListener('DOMContentLoaded', () => {
         { name: 'Lethal Company', appId: 1966720, videoId: '8v5O2-Lw_I8', tags: ['Co-op', 'Horror', 'Survival'], descriptionKey: 'lethalCompanyDesc' },
         { name: 'Palworld', appId: 1623730, videoId: 'W_2quIponmE', tags: ['Survival', 'Creature Collector', 'Open World'], descriptionKey: 'palworldDesc' }
     ];
-    
+
     function applyTheme(theme) {
         document.body.className = theme + '-mode';
         themeSwitcher.textContent = theme === 'light' ? '🌙' : '☀️';
@@ -147,8 +148,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             }
         });
-        // Re-render game cards to update any text if needed
-        renderGames(); 
+        renderGames(searchInput.value);
     }
 
     function createGameCard(game, type) {
@@ -159,15 +159,12 @@ document.addEventListener('DOMContentLoaded', () => {
         card.addEventListener('click', () => showGameDetails(game));
         return card;
     }
-    
+
     function showGameDetails(game) {
         modalTitle.textContent = game.name;
-        
-        const description = (translations[currentLanguage] && translations[currentLanguage][game.descriptionKey]) 
-                            || (translations['en'][game.descriptionKey] 
-                            || "Description not available.");
+        const description = (translations[currentLanguage] && translations[currentLanguage][game.descriptionKey]) || (translations['en'][game.descriptionKey] || "Description not available.");
         modalDescription.textContent = description;
-        
+
         modalTags.innerHTML = '';
         if (game.tags) {
             game.tags.forEach(tagText => {
@@ -197,30 +194,53 @@ document.addEventListener('DOMContentLoaded', () => {
             [array[i], array[j]] = [array[j], array[i]];
         }
     }
-
+    
     function renderGames(filter = '') {
         const lowerFilter = filter.toLowerCase();
-        
-        // Render hot games (never changes after initial load)
+
         hotGamesContainer.innerHTML = '';
         hotGames.filter(g => g.name.toLowerCase().includes(lowerFilter))
                 .forEach(game => hotGamesContainer.appendChild(createGameCard(game, 'hot')));
 
-        // Render main games
         gameReviewsContainer.innerHTML = '';
         mainGames.filter(g => g.name.toLowerCase().includes(lowerFilter))
                  .forEach(game => gameReviewsContainer.appendChild(createGameCard(game, 'main')));
     }
     
+    function reshuffleHotGames() {
+        console.log("Reshuffling Hot Games...");
+        let allCurrentGames = [...hotGames, ...mainGames];
+        shuffleArray(allCurrentGames);
+        hotGames = allCurrentGames.slice(0, 10);
+        mainGames = allCurrentGames.slice(10);
+        renderGames(searchInput.value);
+    }
+
+    function startHotGameTimer() {
+        clearInterval(timerInterval); // Clear any existing timer
+        let duration = 600; // 10 minutes in seconds
+
+        timerInterval = setInterval(() => {
+            const minutes = Math.floor(duration / 60).toString().padStart(2, '0');
+            const seconds = (duration % 60).toString().padStart(2, '0');
+            hotGamesTimer.textContent = `${minutes}:${seconds}`;
+
+            if (--duration < 0) {
+                reshuffleHotGames();
+                duration = 600; // Reset timer
+            }
+        }, 1000);
+    }
+
     function initialLoad() {
         let shuffledGames = [...allGames];
         shuffleArray(shuffledGames);
-        
         hotGames = shuffledGames.slice(0, 10);
         mainGames = shuffledGames.slice(10);
         
         applyTheme(currentTheme);
-        applyLanguage(currentLanguage);
+        applyLanguage(currentLanguage); // This will also call renderGames
+        startHotGameTimer();
     }
 
     // --- Event Listeners ---
