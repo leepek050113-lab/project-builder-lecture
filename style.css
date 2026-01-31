@@ -9,6 +9,8 @@
     --search-bg-light: #fff;
     --search-border-light: #ccc;
     --search-focus-border-light: #6c63ff;
+    --modal-bg-light: rgba(0,0,0,0.5);
+    --modal-content-bg-light: #fff;
 
     --background-color-dark: #121212;
     --text-color-dark: #e0e0e0;
@@ -20,6 +22,8 @@
     --search-bg-dark: #2c2c2c;
     --search-border-dark: #555;
     --search-focus-border-dark: #bb86fc;
+    --modal-bg-dark: rgba(0,0,0,0.7);
+    --modal-content-bg-dark: #2c2c2c;
 }
 
 body {
@@ -144,9 +148,10 @@ header {
     background-color: var(--card-bg-color-light);
     border: 1px solid #ddd;
     border-radius: 12px;
-    padding: 1.5rem;
     box-shadow: 0 4px 6px rgba(0,0,0,0.1);
     transition: transform 0.2s, box-shadow 0.2s;
+    cursor: pointer;
+    overflow: hidden; /* Ensures the image fits within the card's rounded corners */
 }
 
 .dark-mode .review-card {
@@ -159,18 +164,100 @@ header {
     box-shadow: 0 8px 12px rgba(0,0,0,0.15);
 }
 
-.review-card h2 {
+.review-card img {
+    width: 100%;
+    height: 170px; /* Taller image for a better cover look */
+    object-fit: cover; /* Ensures the image covers the area, cropping if necessary */
+    display: block;
+}
+
+
+.review-card-content {
+    padding: 1.5rem;
+}
+
+.review-card-content h2 {
     font-size: 1.5rem;
     margin-top: 0;
     color: var(--header-bg-color-light);
 }
 
-.dark-mode .review-card h2 {
+.dark-mode .review-card-content h2 {
     color: var(--header-text-color-dark);
 }
 
-.review-card img {
-    max-width: 100%;
+/* Modal Styles */
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1000; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto; /* Enable scroll if needed */
+    background-color: var(--modal-bg-light);
+}
+
+.dark-mode .modal {
+    background-color: var(--modal-bg-dark);
+}
+
+.modal-content {
+    background-color: var(--modal-content-bg-light);
+    margin: 10% auto; /* 10% from the top and centered */
+    padding: 2rem;
+    border-radius: 12px;
+    max-width: 600px;
+    position: relative;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+    animation: fadeIn 0.3s;
+}
+
+.dark-mode .modal-content {
+    background-color: var(--modal-content-bg-dark);
+}
+
+@keyframes fadeIn {
+    from {opacity: 0; transform: scale(0.95);}
+    to {opacity: 1; transform: scale(1);}
+}
+
+.close-button {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.close-button:hover,
+.close-button:focus {
+    color: #333;
+    text-decoration: none;
+    outline: none;
+}
+
+.dark-mode .close-button:hover,
+.dark-mode .close-button:focus {
+    color: #fff;
+}
+
+.modal-game-image {
+    width: 100%;
+    height: 250px;
+    object-fit: cover;
     border-radius: 8px;
     margin-bottom: 1rem;
+}
+
+.modal-game-details {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 1rem;
+    color: #555;
+}
+
+.dark-mode .modal-game-details {
+    color: #bbb;
 }
