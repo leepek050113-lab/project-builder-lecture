@@ -22,7 +22,12 @@ document.addEventListener('DOMContentLoaded', () => {
     let currentLanguage = localStorage.getItem('language') || 'en';
     let hotGames = [];
     let mainGames = [];
+    let displayedGames = []; // Currently displayed subset of allGames
     let timerInterval;
+    const SAMPLE_SIZE = 50; // Show 50 games at a time
+    const HOT_GAME_COUNT = 10;
+
+    // --- Functions ---
 
     function applyTheme(theme) {
         document.body.className = theme + '-mode';
@@ -36,13 +41,19 @@ document.addEventListener('DOMContentLoaded', () => {
         document.querySelectorAll('[data-lang-key]').forEach(el => {
             const key = el.getAttribute('data-lang-key');
             if (translations[lang] && translations[lang][key]) {
-                if (el.tagName === 'INPUT') {
-                    el.placeholder = translations[lang][key];
-                } else {
-                    el.textContent = translations[lang][key];
-                }
+                const value = translations[lang][key];
+                if (el.tagName === 'INPUT') el.placeholder = value;
+                else el.textContent = value;
             }
         });
+        // Re-render descriptions if modal is open
+        if (modal.style.display === 'block') {
+            const gameId = modal.dataset.gameId;
+            if (gameId) {
+                const game = displayedGames.find(g => g.appId == gameId);
+                if (game) showGameDetails(game); // Refresh description
+            }
+        }
         renderGames(searchInput.value);
     }
 
@@ -56,6 +67,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function showGameDetails(game) {
+        modal.dataset.gameId = game.appId; // Store appId for language change
         modalTitle.textContent = game.name;
         const description = (translations[currentLanguage] && translations[currentLanguage][game.descriptionKey]) || (translations['en'][game.descriptionKey] || "Description not available.");
         modalDescription.textContent = description;
@@ -70,17 +82,15 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         }
 
-        if (game.videoId) {
-            modalVideoLink.href = `https://www.youtube.com/watch?v=${game.videoId}`;
-            modalVideoLink.style.display = 'inline-block';
-        } else {
-            modalVideoLink.style.display = 'none';
-        }
+        modalVideoLink.href = game.videoId ? `https://www.youtube.com/watch?v=${game.videoId}` : '#';
+        modalVideoLink.style.display = game.videoId ? 'inline-block' : 'none';
+        
         modal.style.display = 'block';
     }
 
     function closeModal() {
         modal.style.display = 'none';
+        modal.dataset.gameId = ''; // Clear stored appId
     }
 
     function shuffleArray(array) {
@@ -93,55 +103,62 @@ document.addEventListener('DOMContentLoaded', () => {
     function renderGames(filter = '') {
         const lowerFilter = filter.toLowerCase();
 
+        const filteredHot = hotGames.filter(g => g.name.toLowerCase().includes(lowerFilter));
+        const filteredMain = mainGames.filter(g => g.name.toLowerCase().includes(lowerFilter));
+
         hotGamesContainer.innerHTML = '';
-        hotGames.filter(g => g.name.toLowerCase().includes(lowerFilter))
-                .forEach(game => hotGamesContainer.appendChild(createGameCard(game, 'hot')));
+        filteredHot.forEach(game => hotGamesContainer.appendChild(createGameCard(game, 'hot')));
 
         gameReviewsContainer.innerHTML = '';
-        mainGames.filter(g => g.name.toLowerCase().includes(lowerFilter))
-                 .forEach(game => gameReviewsContainer.appendChild(createGameCard(game, 'main')));
+        filteredMain.forEach(game => gameReviewsContainer.appendChild(createGameCard(game, 'main')));
     }
     
-    function reshuffleHotGames() {
-        console.log("Reshuffling Hot Games...");
-        let allCurrentGames = [...hotGames, ...mainGames];
-        shuffleArray(allCurrentGames);
-        hotGames = allCurrentGames.slice(0, 10);
-        mainGames = allCurrentGames.slice(10);
+    function reshuffleDisplayedGames() {
+        shuffleArray(allGames);
+        displayedGames = allGames.slice(0, SAMPLE_SIZE);
+        hotGames = displayedGames.slice(0, HOT_GAME_COUNT);
+        mainGames = displayedGames.slice(HOT_GAME_COUNT);
         renderGames(searchInput.value);
+        // Restart the timer since we are reshuffling everything
+        startHotGameTimer(); 
     }
 
     function startHotGameTimer() {
-        clearInterval(timerInterval); // Clear any existing timer
-        let duration = 600; // 10 minutes in seconds
+        clearInterval(timerInterval);
+        let duration = 600; // 10 minutes
 
-        timerInterval = setInterval(() => {
+        const updateTimer = () => {
             const minutes = Math.floor(duration / 60).toString().padStart(2, '0');
             const seconds = (duration % 60).toString().padStart(2, '0');
             hotGamesTimer.textContent = `${minutes}:${seconds}`;
+        };
 
-            if (--duration < 0) {
-                reshuffleHotGames();
+        updateTimer(); // Initial display
+
+        timerInterval = setInterval(() => {
+            duration--;
+            updateTimer();
+            if (duration < 0) {
+                // When timer ends, only reshuffle the hot games from the currently displayed set
+                shuffleArray(displayedGames);
+                hotGames = displayedGames.slice(0, HOT_GAME_COUNT);
+                mainGames = displayedGames.slice(HOT_GAME_COUNT);
+                renderGames(searchInput.value);
                 duration = 600; // Reset timer
             }
         }, 1000);
     }
 
     function initialLoad() {
-        // Ensure gamedata.js is loaded and allGames is available
         if (typeof allGames === 'undefined' || typeof translations === 'undefined') {
-            console.error('Game data is not loaded yet!');
+            console.error('Game data is not loaded yet! Retrying in 100ms...');
+            setTimeout(initialLoad, 100);
             return;
         }
-
-        let shuffledGames = [...allGames];
-        shuffleArray(shuffledGames);
-        hotGames = shuffledGames.slice(0, 10);
-        mainGames = shuffledGames.slice(10);
         
         applyTheme(currentTheme);
-        applyLanguage(currentLanguage); // This will also call renderGames
-        startHotGameTimer();
+        reshuffleDisplayedGames(); // This now handles the initial game selection and rendering
+        applyLanguage(currentLanguage); // Apply language translations
     }
 
     // --- Event Listeners ---
@@ -156,9 +173,10 @@ document.addEventListener('DOMContentLoaded', () => {
     window.addEventListener('click', (e) => {
         if (e.target === modal) closeModal();
     });
+    // Refresh button now re-samples the entire game list
     refreshButton.addEventListener('click', () => {
-        shuffleArray(mainGames);
-        renderGames(searchInput.value);
+        console.log("Full reshuffle requested!");
+        reshuffleDisplayedGames();
     });
 
     // --- Initial Load ---

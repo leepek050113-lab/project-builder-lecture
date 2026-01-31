@@ -1,6 +1,32 @@
 
 const allGames = [
-    // ... (existing games) ...
+    { name: 'Counter-Strike 2', appId: 730, videoId: 'c80_g_m2_RA', tags: ['FPS', 'Shooter', 'Multiplayer', 'Competitive'], descriptionKey: 'cs2Desc' },
+    { name: 'Dota 2', appId: 570, videoId: '-cSFPIwQp4s', tags: ['MOBA', 'Strategy', 'Free to Play'], descriptionKey: 'dota2Desc' },
+    { name: 'PUBG: BATTLEGROUNDS', appId: 578080, videoId: '93h9a3_j2j0', tags: ['Battle Royale', 'Shooter', 'Multiplayer'], descriptionKey: 'pubgDesc' },
+    { name: 'Apex Legends', appId: 1172470, videoId: 'o2Wf_1_1y5E', tags: ['Hero Shooter', 'Battle Royale', 'Free to Play'], descriptionKey: 'apexLegendsDesc' },
+    { name: 'Grand Theft Auto V', appId: 271590, videoId: 'QkkoHAzjnUs', tags: ['Open World', 'Action', 'Multiplayer'], descriptionKey: 'gta5Desc' },
+    { name: 'Stardew Valley', appId: 413150, videoId: 'ot7uXNQskhs', tags: ['Farming Sim', 'RPG', 'Life Sim'], descriptionKey: 'stardewValleyDesc' },
+    { name: 'Tom Clancy\'s Rainbow Six Siege', appId: 359550, videoId: '6wlvYh0h63k', tags: ['Tactical', 'FPS', 'Multiplayer'], descriptionKey: 'rainbowSixSiegeDesc' },
+    { name: 'Rust', appId: 252490, videoId: 'LGcECozNXEw', tags: ['Survival', 'PvP', 'Multiplayer'], descriptionKey: 'rustDesc' },
+    { name: 'Warframe', appId: 230410, videoId: 'ZxB-aV2s6sU', tags: ['Looter Shooter', 'Action RPG', 'Free to Play'], descriptionKey: 'warframeDesc' },
+    { name: 'Destiny 2', appId: 1085660, videoId: '8FHe3y_2i_Q', tags: ['Looter Shooter', 'FPS', 'Free to Play'], descriptionKey: 'destiny2Desc' },
+    { name: 'Team Fortress 2', appId: 440, videoId: 'N1_qI-3S_0w', tags: ['Hero Shooter', 'Free to Play', 'Classic'], descriptionKey: 'tf2Desc' },
+    { name: 'Sid Meier\'s Civilization VI', appId: 289070, videoId: '5KdE0p2z_t4', tags: ['4X', 'Turn-Based Strategy', 'Historical'], descriptionKey: 'civ6Desc' },
+    { name: 'The Witcher 3: Wild Hunt', appId: 292030, videoId: 'c0i88t0Kacs', tags: ['Action RPG', 'Open World', 'Story Rich'], descriptionKey: 'witcher3Desc' },
+    { name: 'Terraria', appId: 105600, videoId: 'w7uOhFTrrq0', tags: ['Sandbox', 'Adventure', '2D'], descriptionKey: 'terrariaDesc' },
+    { name: 'Garry\'s Mod', appId: 4000, videoId: 'hpjV962DLws', tags: ['Sandbox', 'Physics', 'Multiplayer'], descriptionKey: 'gmodDesc' },
+    { name: 'ARK: Survival Evolved', appId: 346110, videoId: 'aQM8Y-d6qUg', tags: ['Survival', 'Open World', 'Dinosaurs'], descriptionKey: 'arkDesc' },
+    { name: 'Fallout 4', appId: 377160, videoId: 'GE2BkLqMef4', tags: ['Open World', 'RPG', 'Post-Apocalyptic'], descriptionKey: 'fallout4Desc' },
+    { name: 'The Elder Scrolls V: Skyrim', appId: 489830, videoId: 'JSRtYpNRoN0', tags: ['Open World', 'RPG', 'Singleplayer'], descriptionKey: 'skyrimDesc' },
+    { name: 'Among Us', appId: 945360, videoId: 'grdYIbf_2wE', tags: ['Social Deduction', 'Multiplayer', 'Party Game'], descriptionKey: 'amongUsDesc' },
+    { name: 'Valheim', appId: 892970, videoId: 'BSrJRrls_0w', tags: ['Survival', 'Open World', 'Co-op', 'Viking'], descriptionKey: 'valheimDesc' },
+    { name: 'Red Dead Redemption 2', appId: 1174180, videoId: 'eaW0tYpxLC0', tags: ['Open World', 'Action', 'Story Rich'], descriptionKey: 'rdr2Desc' },
+    { name: 'Cyberpunk 2077', appId: 1091500, videoId: '8X2kIfS6fb8', tags: ['Action RPG', 'Open World', 'Sci-Fi'], descriptionKey: 'cyberpunk2077Desc' },
+    { name: 'Elden Ring', appId: 1245620, videoId: 'E3Huy2cdih0', tags: ['Souls-like', 'Action RPG', 'Open World'], descriptionKey: 'eldenRingDesc' },
+    { name: 'Baldur\'s Gate 3', appId: 1086940, videoId: '1T22pB-Mi5U', tags: ['CRPG', 'Turn-Based', 'Story Rich'], descriptionKey: 'baldursGate3Desc' },
+    { name: 'HELLDIVERS 2', appId: 553850, videoId: 'wX-2g_G9Kz4', tags: ['Co-op', 'Shooter', 'Sci-Fi'], descriptionKey: 'helldivers2Desc' },
+    { name: 'Lethal Company', appId: 1966720, videoId: '8v5O2-Lw_I8', tags: ['Co-op', 'Horror', 'Survival'], descriptionKey: 'lethalCompanyDesc' },
+    { name: 'Palworld', appId: 1623730, videoId: 'W_2quIponmE', tags: ['Survival', 'Creature Collector', 'Open World'], descriptionKey: 'palworldDesc' },
     { name: 'Monster Hunter: World', appId: 582010, videoId: 'XP-VqK6iS6s', tags: ['Action RPG', 'Co-op', 'Open World'], descriptionKey: 'monsterHunterWorldDesc' },
     { name: 'Left 4 Dead 2', appId: 550, videoId: 'g4D21G_2T1g', tags: ['Co-op', 'Zombies', 'FPS', 'Action'], descriptionKey: 'left4Dead2Desc' },
     { name: 'Hades', appId: 1145360, videoId: '91t0ha9x0AE', tags: ['Action Roguelike', 'Indie', 'Mythology'], descriptionKey: 'hadesDesc' },
@@ -20,7 +46,12 @@ const allGames = [
 
 const translations = {
     en: {
-        // ... (existing translations) ...
+        title: 'Steam Game Reviews',
+        hotGamesTitle: '🔥 Hot Right Now',
+        searchPlaceholder: 'Search for a game...',
+        tags: 'Tags',
+        watchTrailer: 'Watch Trailer',
+        // ... (existing descriptions) ...
         monsterHunterWorldDesc: "Welcome to a new world! In Monster Hunter: World, the latest installment in the series, you can enjoy the ultimate hunting experience, using everything at your disposal to hunt monsters in a new world teeming with surprises and excitement.",
         left4Dead2Desc: "Set in the zombie apocalypse, Left 4 Dead 2 (L4D2) is the highly anticipated sequel to the award-winning Left 4 Dead, the #1 co-op game of 2008. This co-operative action horror FPS takes you and your friends through the cities, swamps and cemeteries of the Deep South, from Savannah to New Orleans.",
         hadesDesc: "Defy the god of the dead as you hack and slash out of the Underworld in this rogue-like dungeon crawler from the creators of Bastion, Transistor, and Pyre.",
@@ -38,7 +69,12 @@ const translations = {
         citiesSkylinesDesc: "Cities: Skylines is a modern take on the classic city simulation. The game introduces new game play elements to realize the thrill and hardships of creating and maintaining a real city whilst expanding on some well-established tropes of the city building experience."
     },
     ko: {
-        // ... (existing translations) ...
+        title: '스팀 게임 리뷰',
+        hotGamesTitle: '🔥 지금 가장 핫한 게임',
+        searchPlaceholder: '게임을 검색하세요...',
+        tags: '태그',
+        watchTrailer: '트레일러 보기',
+        // ... (existing descriptions) ...
         monsterHunterWorldDesc: "새로운 세계에 오신 것을 환영합니다! 시리즈의 최신작인 Monster Hunter: World에서 당신은 놀라움과 흥분으로 가득한 새로운 세계에서 몬스터를 사냥하기 위해 모든 것을 사용할 수 있으며, 최고의 사냥 경험을 즐길 수 있습니다.",
         left4Dead2Desc: "좀비 대재앙을 배경으로 하는 Left 4 Dead 2(L4D2)는 2008년 최고의 협동 게임으로 선정된 수상 경력에 빛나는 Left 4 Dead의 속편입니다. 이 협동 액션 공포 FPS는 당신과 당신의 친구들을 서배너에서 뉴올리언스까지 남부 깊은 곳의 도시, 늪, 묘지를 통과하게 합니다.",
         hadesDesc: "Bastion, Transistor, Pyre의 제작진이 만든 이 로그라이크 던전 크롤러에서 지하 세계에서 탈출하면서 죽음의 신에게 도전하세요.",
