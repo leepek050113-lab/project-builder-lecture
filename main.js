@@ -1,3 +1,4 @@
+
 document.addEventListener('DOMContentLoaded', () => {
     // --- UI Elements ---
     const themeSwitcher = document.getElementById('theme-switcher');
@@ -22,8 +23,8 @@ document.addEventListener('DOMContentLoaded', () => {
     let currentLanguage = localStorage.getItem('language') || 'en';
     let hotGames = [];
     let mainGames = [];
-    let displayedGames = []; // The current pool of 50 games (hot + main)
-    let seenGameAppIds = new Set(); // Tracks all games shown to the user in the session
+    let displayedGames = []; 
+    let seenGameAppIds = new Set();
     let timerInterval;
 
     const TOTAL_SAMPLE_SIZE = 50; 
@@ -41,6 +42,8 @@ document.addEventListener('DOMContentLoaded', () => {
     function applyLanguage(lang) {
         currentLanguage = lang;
         localStorage.setItem('language', lang);
+
+        // Update all static text elements
         document.querySelectorAll('[data-lang-key]').forEach(el => {
             const key = el.getAttribute('data-lang-key');
             if (translations[lang] && translations[lang][key]) {
@@ -49,14 +52,25 @@ document.addEventListener('DOMContentLoaded', () => {
                 else el.textContent = value;
             }
         });
+
+        // Visually update active language button
+        langEn.classList.toggle('active', lang === 'en');
+        langKo.classList.toggle('active', lang === 'ko');
+
+        // Re-render games to update names
+        renderGames(searchInput.value);
+
+        // If a modal is open, refresh its content
         if (modal.style.display === 'block') {
             const gameId = modal.dataset.gameId;
             if (gameId) {
-                const game = [...hotGames, ...mainGames].find(g => g.appId == gameId);
-                if (game) showGameDetails(game);
+                // Find the game data from the original 'allGames' array for consistency
+                const game = allGames.find(g => g.appId == gameId);
+                if (game) {
+                    showGameDetails(game); // Re-run the detail display logic
+                }
             }
         }
-        renderGames(searchInput.value);
     }
 
     function createGameCard(game, type) {
@@ -70,9 +84,16 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function showGameDetails(game) {
         modal.dataset.gameId = game.appId;
-        modalTitle.textContent = game.name;
-        const description = (translations[currentLanguage] && translations[currentLanguage][game.descriptionKey]) || (translations['en'][game.descriptionKey] || "Description not available.");
+        modalTitle.textContent = game.name; // Name is already correct from render
+
+        // Get description using the current language, fallback to English, then to a default message
+        const description = (translations[currentLanguage] && translations[currentLanguage][game.descriptionKey]) 
+                            || (translations['en'][game.descriptionKey] 
+                            || "Description not available.");
         modalDescription.textContent = description;
+        
+        // Update trailer button text
+        modalVideoLink.textContent = translations[currentLanguage]['watchTrailer'] || "Watch Trailer";
 
         modalTags.innerHTML = '';
         if (game.tags) {
@@ -115,44 +136,35 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     
     function loadNewMainGames() {
-        console.log("Loading new main games, keeping hot games.");
-
         let unseenGames = allGames.filter(game => !seenGameAppIds.has(game.appId));
 
         if (unseenGames.length < MAIN_GAME_COUNT) {
-            console.log("Not enough unseen games. Resetting seen list.");
-            // Reset seen list, but keep current games from being immediately reshown
-            seenGameAppIds = new Set([...hotGames, ...mainGames].map(g => g.appId));
+            seenGameAppIds = new Set([...hotGames].map(g => g.appId)); // Keep hot games marked as seen
             unseenGames = allGames.filter(game => !seenGameAppIds.has(game.appId));
-            // If still not enough, it means we have less than 100 games total. Just use what we have.
-            if(unseenGames.length === 0) {
-                console.log("All games have been displayed.");
-                return; // or show a message to the user
-            }
         }
 
         shuffleArray(unseenGames);
         const newMainGames = unseenGames.slice(0, MAIN_GAME_COUNT);
-
         newMainGames.forEach(game => seenGameAppIds.add(game.appId));
 
         mainGames = newMainGames;
-        displayedGames = [...hotGames, ...mainGames]; // Update the total displayed pool
+        displayedGames = [...hotGames, ...mainGames];
 
         renderGames(searchInput.value);
     }
 
     function reshuffleHotGames() {
-        console.log("Reshuffling hot games from the current display pool.");
-        
-        // The pool is the currently displayed 50 games
         let currentPool = [...hotGames, ...mainGames];
         shuffleArray(currentPool);
 
         hotGames = currentPool.slice(0, HOT_GAME_COUNT);
         mainGames = currentPool.slice(HOT_GAME_COUNT);
 
+        // Add the new hot games to the seen set
+        hotGames.forEach(game => seenGameAppIds.add(game.appId));
+
         renderGames(searchInput.value);
+        startHotGameTimer(); // Restart timer
     }
 
     function startHotGameTimer() {
@@ -172,7 +184,6 @@ document.addEventListener('DOMContentLoaded', () => {
             updateTimer();
             if (duration < 0) {
                 reshuffleHotGames();
-                duration = 600; // Reset timer
             }
         }, 1000);
     }
@@ -184,16 +195,16 @@ document.addEventListener('DOMContentLoaded', () => {
         }
         
         shuffleArray(allGames);
-        displayedGames = allGames.slice(0, TOTAL_SAMPLE_SIZE);
-        
-        displayedGames.forEach(game => seenGameAppIds.add(game.appId));
+        let initialGames = allGames.slice(0, TOTAL_SAMPLE_SIZE);
+        initialGames.forEach(game => seenGameAppIds.add(game.appId));
 
-        hotGames = displayedGames.slice(0, HOT_GAME_COUNT);
-        mainGames = displayedGames.slice(HOT_GAME_COUNT);
+        hotGames = initialGames.slice(0, HOT_GAME_COUNT);
+        mainGames = initialGames.slice(HOT_GAME_COUNT);
+        
+        displayedGames = [...hotGames, ...mainGames];
         
         applyTheme(currentTheme);
         applyLanguage(currentLanguage);
-        renderGames();
         startHotGameTimer();
     }
 
@@ -210,7 +221,6 @@ document.addEventListener('DOMContentLoaded', () => {
         if (e.target === modal) closeModal();
     });
 
-    // Refresh button now only loads new MAIN games, keeping HOT games stable.
     refreshButton.addEventListener('click', loadNewMainGames);
 
     // --- Initial Load ---
