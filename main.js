@@ -13,7 +13,23 @@ document.addEventListener('DOMContentLoaded', () => {
         localStorage.setItem('theme', theme);
     });
 
-    // Existing language switcher logic
+    const translations = {
+        en: {
+            title: 'Steam Game Reviews',
+            searchPlaceholder: 'Search for a game...',
+            stardewValleyReview: 'A relaxing farming simulation game.',
+            hadesReview: 'An action-packed roguelike with a great story.',
+            celesteReview: 'A challenging platformer with a touching narrative.'
+        },
+        ko: {
+            title: '스팀 게임 리뷰',
+            searchPlaceholder: '게임을 검색하세요...',
+            stardewValleyReview: '편안한 농장 시뮬레이션 게임입니다.',
+            hadesReview: '훌륭한 스토리를 가진 액션 로그라이크 게임입니다.',
+            celesteReview: '감동적인 서사를 가진 도전적인 플랫포머 게임입니다.'
+        }
+    };
+
     const langKo = document.getElementById('lang-ko');
     const langEn = document.getElementById('lang-en');
 
@@ -21,34 +37,43 @@ document.addEventListener('DOMContentLoaded', () => {
     langEn.addEventListener('click', () => setLanguage('en'));
 
     function setLanguage(lang) {
-        // In a real app, you would load the correct language file
-        // or change text content dynamically.
-        console.log(`Language set to ${lang}`);
-        // For demonstration, we'll just update the placeholder
-        const searchInput = document.getElementById('searchInput');
-        if (lang === 'ko') {
-            searchInput.placeholder = '게임 검색...';
-        } else {
-            searchInput.placeholder = 'Search for a game...';
-        }
+        document.querySelectorAll('[data-lang-key]').forEach(elem => {
+            const key = elem.getAttribute('data-lang-key');
+            if (translations[lang] && translations[lang][key]) {
+                if (elem.tagName === 'INPUT') {
+                    elem.placeholder = translations[lang][key];
+                } else {
+                    elem.textContent = translations[lang][key];
+                }
+            }
+        });
+        localStorage.setItem('language', lang);
+        renderGameReviews(lang); // Re-render reviews with the selected language
     }
 
-    // Placeholder for game reviews - in a real app, you'd fetch this data
-    const gameReviews = document.getElementById('gameReviews');
     const games = [
-        { name: 'Stardew Valley', review: 'A relaxing farming simulation game.', image: 'https://via.placeholder.com/300x150.png?text=Stardew+Valley' },
-        { name: 'Hades', review: 'An action-packed roguelike with a great story.', image: 'https://via.placeholder.com/300x150.png?text=Hades' },
-        { name: 'Celeste', review: 'A challenging platformer with a touching narrative.', image: 'https://via.placeholder.com/300x150.png?text=Celeste' }
+        { name: 'Stardew Valley', reviewKey: 'stardewValleyReview', image: 'https://via.placeholder.com/300x150.png?text=Stardew+Valley' },
+        { name: 'Hades', reviewKey: 'hadesReview', image: 'https://via.placeholder.com/300x150.png?text=Hades' },
+        { name: 'Celeste', reviewKey: 'celesteReview', image: 'https://via.placeholder.com/300x150.png?text=Celeste' }
     ];
 
-    games.forEach(game => {
-        const card = document.createElement('div');
-        card.className = 'review-card';
-        card.innerHTML = `
-            <img src="${game.image}" alt="${game.name}">
-            <h2>${game.name}</h2>
-            <p>${game.review}</p>
-        `;
-        gameReviews.appendChild(card);
-    });
+    const gameReviewsContainer = document.getElementById('gameReviews');
+
+    function renderGameReviews(lang) {
+        gameReviewsContainer.innerHTML = ''; // Clear existing reviews
+        games.forEach(game => {
+            const card = document.createElement('div');
+            card.className = 'review-card';
+            const reviewText = (translations[lang] && translations[lang][game.reviewKey]) || '';
+            card.innerHTML = `
+                <img src="${game.image}" alt="${game.name}">
+                <h2>${game.name}</h2>
+                <p>${reviewText}</p>
+            `;
+            gameReviewsContainer.appendChild(card);
+        });
+    }
+
+    const savedLang = localStorage.getItem('language') || 'en';
+    setLanguage(savedLang);
 });
