@@ -42,7 +42,6 @@ const allGames = [
     { name: 'Human: Fall Flat', appId: 477160, videoId: 'S_YQ_v-sX_A', tags: ['Physics', 'Puzzle', 'Co-op', 'Funny'], descriptionKey: 'humanFallFlatDesc' },
     { name: 'Euro Truck Simulator 2', appId: 227300, videoId: 'xlTuC18xVII', tags: ['Simulation', 'Driving', 'Relaxing', 'Open World'], descriptionKey: 'euroTruckSimulator2Desc' },
     { name: 'Cities: Skylines', appId: 255710, videoId: '0gI2N1Iejww', tags: ['City Builder', 'Simulation', 'Strategy', 'Management'], descriptionKey: 'citiesSkylinesDesc' },
-    // ADDING MORE GAMES!
     { name: "BioShock Remastered", appId: 409710, videoId: '9ewj-voN2fM', tags: ['FPS', 'Story Rich', 'Atmospheric'], descriptionKey: 'bioshockDesc' },
     { name: "The Sims 4", appId: 1222670, videoId: 'z_S0_z0b-G8', tags: ['Life Sim', 'Simulation', 'Character Customization'], descriptionKey: 'sims4Desc' },
     { name: "No Man's Sky", appId: 275850, videoId: 'v5-L_2-hG6s', tags: ['Open World', 'Survival', 'Space', 'Exploration'], descriptionKey: 'noMansSkyDesc' },
@@ -52,44 +51,48 @@ const allGames = [
     { name: "Half-Life: Alyx", appId: 546560, videoId: 'O2W0N3u-pQ4', tags: ['VR', 'FPS', 'Action', 'Story Rich'], descriptionKey: 'alyxDesc' },
     { name: "Sekiro: Shadows Die Twice", appId: 814380, videoId: 'GRJ_pX3dZkE', tags: ['Action', 'Souls-like', 'Difficult', 'Ninja'], descriptionKey: 'sekiroDesc' },
     { name: "DOOM Eternal", appId: 782330, videoId: 'a_0-b3iV_gI', tags: ['FPS', 'Action', 'Demons', 'Fast-Paced'], descriptionKey: 'doomEternalDesc' },
-    { name: "Control", appId: 870780, videoId: 'P4iA52K9fL8', tags: ['Action', 'Supernatural', 'Third Person', 'Metroidvania'], descriptionKey: 'controlDesc' }
+    { name: "Control", appId: 870780, videoId: 'P4iA52K9fL8', tags: ['Action', 'Supernatural', 'Third Person', 'Metroidvania'], descriptionKey: 'controlDesc' },
+    // ADDING MORE GAMES (BATCH 2)!
+    { name: "Deep Rock Galactic", appId: 548430, videoId: 'qhGxenbo4gE', tags: ['Co-op', 'FPS', 'Dwarves', 'Mining'], descriptionKey: 'deepRockGalacticDesc' },
+    { name: "Satisfactory", appId: 526870, videoId: 'W_h2V_Atj6c', tags: ['Automation', 'Base Building', 'Open World', 'First-Person'], descriptionKey: 'satisfactoryDesc' },
+    { name: "Fallout: New Vegas", appId: 22380, videoId: 'l-x-1KOPZ_A', tags: ['RPG', 'Open World', 'Post-Apocalyptic', 'Story Rich'], descriptionKey: 'falloutNewVegasDesc' },
+    { name: "The Elder Scrolls IV: Oblivion", appId: 900883, videoId: 'hDb0I4o5R-U', tags: ['RPG', 'Open World', 'Fantasy', 'Classic'], descriptionKey: 'oblivionDesc' },
+    { name: "Borderlands 2", appId: 49520, videoId: 'E_H-c3P7t8s', tags: ['Looter Shooter', 'FPS', 'Co-op', 'Action RPG'], descriptionKey: 'borderlands2Desc' },
+    { name: "XCOM 2", appId: 268500, videoId: '3qLd4R12-pI', tags: ['Turn-Based Tactics', 'Strategy', 'Sci-Fi', 'Aliens'], descriptionKey: 'xcom2Desc' },
+    { name: "Total War: WARHAMMER II", appId: 594570, videoId: 'fXxe89L_31M', tags: ['Strategy', 'RTS', 'Fantasy', 'Grand Strategy'], descriptionKey: 'totalWarhammer2Desc' },
+    { name: "Stellaris", appId: 281990, videoId: 'zP9k_F_zABM', tags: ['Grand Strategy', '4X', 'Sci-Fi', 'Space'], descriptionKey: 'stellarisDesc' },
+    { name: "Rocket League", appId: 252950, videoId: 'Om-k4g8F-wI', tags: ['Soccer', 'Sports', 'Multiplayer', 'Competitive'], descriptionKey: 'rocketLeagueDesc' },
+    { name: "Path of Exile", appId: 238960, videoId: 'G-s-chrd0cI', tags: ['Action RPG', 'Hack and Slash', 'Free to Play', 'Loot'], descriptionKey: 'pathOfExileDesc' },
+    { name: "War Thunder", appId: 236390, videoId: 'pzgO_o_k92k', tags: ['Vehicular Combat', 'WWII', 'Free to Play', 'Simulation'], descriptionKey: 'warThunderDesc' }
 ];
 
 const translations = {
     en: {
-        title: 'Steam Game Reviews',
-        hotGamesTitle: '🔥 Hot Right Now',
-        searchPlaceholder: 'Search for a game...',
-        tags: 'Tags',
-        watchTrailer: 'Watch Trailer',
         // ... (existing descriptions) ...
-        bioshockDesc: "BioShock is a shooter unlike any you've ever played, loaded with weapons and tactics never seen. You'll have a complete arsenal at your disposal from simple revolvers to grenade launchers and chemical throwers, but you'll also be forced to genetically modify your DNA to create an even more deadly weapon: you.",
-        sims4Desc: "Unleash your imagination and create a unique world of Sims that’s an expression of you! Explore and customize every detail from Sims to homes, and much more.",
-        noMansSkyDesc: "Inspired by the adventure and imagination that we love from classic science-fiction, No Man's Sky presents you with a galaxy to explore, filled with unique planets and lifeforms, and constant danger and action.",
-        cupheadDesc: "Cuphead is a classic run and gun action game heavily focused on boss battles. Inspired by cartoons of the 1930s, the visuals and audio are painstakingly created with the same techniques of the era, i.e. traditional hand drawn cel animation, watercolor backgrounds, and original jazz recordings.",
-        darksouls3Desc: "As fires fade and the world falls into ruin, journey into a universe filled with more colossal enemies and environments. Players will be immersed into a world of epic atmosphere and darkness through faster gameplay and amplified combat intensity.",
-        portal2Desc: "The 'Perpetual Testing Initiative' has been expanded to allow you to design co-op puzzles for you and your friends!",
-        alyxDesc: "It's the story of an impossible fight against a vicious alien race known as the Combine, set between the events of Half-Life and Half-Life 2.",
-        sekiroDesc: "Carve your own clever path to vengeance in an all-new adventure from developer FromSoftware, creators of the Dark Souls series.",
-        doomEternalDesc: "Hell’s armies have invaded Earth. Become the Slayer in an epic single-player campaign to conquer demons across dimensions and stop the final destruction of humanity.",
-        controlDesc: "After a secretive agency in New York is invaded by an otherworldly threat, you become the new Director struggling to regain Control."
+        deepRockGalacticDesc: "Deep Rock Galactic is a 1-4 player co-op FPS featuring badass space Dwarves, 100% destructible environments, procedurally-generated caves, and endless hordes of alien monsters.",
+        satisfactoryDesc: "Satisfactory is a first-person open-world factory building game with a dash of exploration and combat. Play alone or with friends, explore an alien planet, create multi-story factories, and enter conveyor belt heaven!",
+        falloutNewVegasDesc: "Welcome to Vegas. New Vegas. It’s the kind of town where you dig your own grave prior to being shot in the head and left for dead…and that’s before things really get ugly.",
+        oblivionDesc: "The Elder Scrolls IV: Oblivion® Game of the Year Edition presents one of the best RPGs of all time like never before. Step inside the most richly detailed and vibrant game-world ever created. With a powerful combination of freeform gameplay and unprecedented graphics, you can unravel the main quest at your own pace or explore the vast world and find your own challenges.",
+        borderlands2Desc: "A new era of shoot and loot is about to begin. Play as one of four new vault hunters facing off against a massive new world of creatures, psychos and the evil mastermind, Handsome Jack.",
+        xcom2Desc: "XCOM 2 is the sequel to XCOM: Enemy Unknown, the 2012 award-winning strategy game of the year. Earth has changed and is now under alien rule. Facing impossible odds you must rebuild XCOM, and ignite a global resistance to reclaim our world and save humanity.",
+        totalWarhammer2Desc: "Strategy gaming perfected. A breath-taking campaign of exploration, expansion and conquest across a fantasy world. Turn-based civilisation management and real-time epic strategy battles with thousands of troops and monsters at your command.",
+        stellarisDesc: "Explore a galaxy full of wonders in this sci-fi grand strategy game from Paradox Development Studios. Interact with diverse alien races, discover strange new worlds with unexpected events and expand the reach of your empire. Each new adventure holds almost limitless possibilities.",
+        rocketLeagueDesc: "Rocket League is a high-powered hybrid of arcade-style soccer and vehicular mayhem with easy-to-understand controls and fluid, physics-driven competition.",
+        pathOfExileDesc: "You are an Exile, struggling to survive on the dark continent of Wraeclast, as you fight to earn power that will allow you to exact your revenge against those who wronged you. Created by hardcore gamers, Path of Exile is an online Action RPG set in a dark fantasy world.",
+        warThunderDesc: "War Thunder is the most comprehensive free-to-play, cross-platform, MMO military game for Windows, Linux, Mac, PlayStation®4, PlayStation®5, Xbox One and Xbox Series X|S dedicated to aviation, armoured vehicles, and naval craft from the early 20th century to the most advanced modern combat units."
     },
     ko: {
-        title: '스팀 게임 리뷰',
-        hotGamesTitle: '🔥 지금 가장 핫한 게임',
-        searchPlaceholder: '게임을 검색하세요...',
-        tags: '태그',
-        watchTrailer: '트레일러 보기',
         // ... (existing descriptions) ...
-        bioshockDesc: "BioShock은 당신이เคย 플레이해본 어떤 슈팅 게임과도 다릅니다. 전에 본 적 없는 무기와 전술로 가득 차 있습니다. 간단한 리볼버부터 수류탄 발사기, 화학물질 투사기까지 완벽한 무기고를 마음대로 사용할 수 있지만, 유전적으로 DNA를 변형하여 더 치명적인 무기인 당신 자신을 만들어야 합니다.",
-        sims4Desc: "상상력을 발휘하여 당신을 표현하는 독특한 심즈 세계를 만드세요! 심즈부터 집까지 모든 세부 사항을 탐색하고 맞춤화하는 등 훨씬 더 많은 것을 할 수 있습니다.",
-        noMansSkyDesc: "고전 공상 과학에서 우리가 사랑하는 모험과 상상력에서 영감을 받은 No Man's Sky는 독특한 행성과 생명체, 끊임없는 위험과 행동으로 가득 찬 탐험할 은하계를 선사합니다.",
-        cupheadDesc: "Cuphead는 보스 전투에 중점을 둔 고전적인 런앤건 액션 게임입니다. 1930년대 만화에서 영감을 받아 시각 및 오디오는 전통적인 손으로 그린 셀 애니메이션, 수채화 배경, 독창적인 재즈 녹음과 같은 시대의 동일한 기술로 공들여 제작되었습니다.",
-        darksouls3Desc: "불이 꺼지고 세상이 폐허로 변하면서 더 거대한 적과 환경으로 가득 찬 우주로 여행을 떠나십시오. 플레이어는 더 빠른 게임 플레이와 증폭된 전투 강도를 통해 장엄한 분위기와 어둠의 세계에 몰입하게 될 것입니다.",
-        portal2Desc: "'영구 테스트 이니셔티브'가 확장되어 당신과 당신의 친구들을 위한 협동 퍼즐을 디자인할 수 있게 되었습니다!",
-        alyxDesc: "이것은 Half-Life와 Half-Life 2의 사건 사이에 설정된 Combine으로 알려진 사악한 외계 종족에 대한 불가능한 싸움에 대한 이야기입니다.",
-        sekiroDesc: "Dark Souls 시리즈의 제작사인 FromSoftware 개발사의 완전히 새로운 모험에서 복수를 향한 자신만의 영리한 길을 개척하십시오.",
-        doomEternalDesc: "지옥의 군대가 지구를 침공했습니다. 차원을 넘어 악마를 정복하고 인류의 최종 파괴를 막기 위한 장대한 싱글 플레이어 캠페인에서 슬레이어가 되십시오.",
-        controlDesc: "뉴욕의 비밀 기관이 다른 세계의 위협에 침범된 후, 당신은 통제권을 되찾기 위해 고군분투하는 새로운 감독이 됩니다."
+        deepRockGalacticDesc: "Deep Rock Galactic은 1-4인용 협동 FPS로, 멋진 우주 드워프, 100% 파괴 가능한 환경, 절차적으로 생성된 동굴, 끝없는 외계 괴물 무리가 특징입니다.",
+        satisfactoryDesc: "Satisfactory는 탐험과 전투가 가미된 1인칭 오픈 월드 공장 건설 게임입니다. 혼자 또는 친구와 함께 플레이하고, 외계 행성을 탐험하고, 다층 공장을 만들고, 컨베이어 벨트 천국에 들어가세요!",
+        falloutNewVegasDesc: "베가스에 오신 것을 환영합니다. 뉴 베가스. 머리에 총을 맞고 죽기 전에 자신의 무덤을 파는 그런 도시입니다... 그리고 상황이 정말 험악해지기 전입니다.",
+        oblivionDesc: "The Elder Scrolls IV: Oblivion® Game of the Year Edition은 역사상 최고의 RPG 중 하나를 이전과는 다른 방식으로 선보입니다. 지금까지 만들어진 게임 세계 중 가장 풍부하고 상세하며 활기찬 게임 세계로 들어가십시오. 자유로운 게임 플레이와 전례 없는 그래픽의 강력한 조합으로 자신의 속도에 맞춰 메인 퀘스트를 풀거나 광대한 세계를 탐험하고 자신만의 도전을 찾을 수 있습니다.",
+        borderlands2Desc: "새로운 시대의 총격과 약탈이 시작됩니다. 네 명의 새로운 볼트 헌터 중 한 명이 되어 거대한 새로운 생물, 사이코, 사악한 주모자인 핸섬 잭의 세계에 맞서십시오.",
+        xcom2Desc: "XCOM 2는 2012년 올해의 수상 경력에 빛나는 전략 게임인 XCOM: Enemy Unknown의 속편입니다. 지구는 변했고 지금은 외계인의 지배를 받고 있습니다. 불가능한 역경에 맞서 XCOM을 재건하고, 세계를 되찾고 인류를 구하기 위한 세계적인 저항을 일으켜야 합니다.",
+        totalWarhammer2Desc: "완벽한 전략 게임. 판타지 세계를 가로지르는 숨막히는 탐험, 확장, 정복의 캠페인. 턴 기반 문명 관리와 수천 명의 군대와 괴물을 지휘하는 실시간 장대한 전략 전투.",
+        stellarisDesc: "Paradox Development Studios의 이 SF 대전략 게임에서 경이로움으로 가득 찬 은하계를 탐험하세요. 다양한 외계 종족과 상호 작용하고, 예상치 못한 사건이 있는 이상한 새로운 세계를 발견하고, 제국의 범위를 확장하세요. 각각의 새로운 모험은 거의 무한한 가능성을 가지고 있습니다.",
+        rocketLeagueDesc: "Rocket League는 이해하기 쉬운 컨트롤과 유동적이고 물리 기반 경쟁을 갖춘 아케이드 스타일 축구와 차량 대혼란의 강력한 하이브리드입니다.",
+        pathOfExileDesc: "당신은 어둠의 대륙 레이클라스트에서 생존하기 위해 고군분투하는 추방자이며, 당신에게 잘못한 자들에게 복수할 수 있는 힘을 얻기 위해 싸웁니다. 하드코어 게이머들이 만든 Path of Exile은 어두운 판타지 세계를 배경으로 하는 온라인 액션 RPG입니다.",
+        warThunderDesc: "War Thunder는 20세기 초부터 가장 진보된 현대 전투 부대에 이르기까지 항공, 장갑차, 해군 함정에 전념하는 Windows, Linux, Mac, PlayStation®4, PlayStation®5, Xbox One 및 Xbox Series X|S를 위한 가장 포괄적인 무료 플레이, 크로스 플랫폼, MMO 군사 게임입니다."
     }
 }

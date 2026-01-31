@@ -22,10 +22,13 @@ document.addEventListener('DOMContentLoaded', () => {
     let currentLanguage = localStorage.getItem('language') || 'en';
     let hotGames = [];
     let mainGames = [];
-    let displayedGames = []; // Currently displayed subset of allGames
+    let displayedGames = []; // The current pool of 50 games (hot + main)
+    let seenGameAppIds = new Set(); // Tracks all games shown to the user in the session
     let timerInterval;
-    const SAMPLE_SIZE = 50; // Show 50 games at a time
+
+    const TOTAL_SAMPLE_SIZE = 50; 
     const HOT_GAME_COUNT = 10;
+    const MAIN_GAME_COUNT = TOTAL_SAMPLE_SIZE - HOT_GAME_COUNT;
 
     // --- Functions ---
 
@@ -46,12 +49,11 @@ document.addEventListener('DOMContentLoaded', () => {
                 else el.textContent = value;
             }
         });
-        // Re-render descriptions if modal is open
         if (modal.style.display === 'block') {
             const gameId = modal.dataset.gameId;
             if (gameId) {
-                const game = displayedGames.find(g => g.appId == gameId);
-                if (game) showGameDetails(game); // Refresh description
+                const game = [...hotGames, ...mainGames].find(g => g.appId == gameId);
+                if (game) showGameDetails(game);
             }
         }
         renderGames(searchInput.value);
@@ -67,7 +69,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function showGameDetails(game) {
-        modal.dataset.gameId = game.appId; // Store appId for language change
+        modal.dataset.gameId = game.appId;
         modalTitle.textContent = game.name;
         const description = (translations[currentLanguage] && translations[currentLanguage][game.descriptionKey]) || (translations['en'][game.descriptionKey] || "Description not available.");
         modalDescription.textContent = description;
@@ -90,7 +92,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function closeModal() {
         modal.style.display = 'none';
-        modal.dataset.gameId = ''; // Clear stored appId
+        modal.dataset.gameId = '';
     }
 
     function shuffleArray(array) {
@@ -103,24 +105,54 @@ document.addEventListener('DOMContentLoaded', () => {
     function renderGames(filter = '') {
         const lowerFilter = filter.toLowerCase();
 
-        const filteredHot = hotGames.filter(g => g.name.toLowerCase().includes(lowerFilter));
-        const filteredMain = mainGames.filter(g => g.name.toLowerCase().includes(lowerFilter));
-
         hotGamesContainer.innerHTML = '';
-        filteredHot.forEach(game => hotGamesContainer.appendChild(createGameCard(game, 'hot')));
+        hotGames.filter(g => g.name.toLowerCase().includes(lowerFilter))
+                .forEach(game => hotGamesContainer.appendChild(createGameCard(game, 'hot')));
 
         gameReviewsContainer.innerHTML = '';
-        filteredMain.forEach(game => gameReviewsContainer.appendChild(createGameCard(game, 'main')));
+        mainGames.filter(g => g.name.toLowerCase().includes(lowerFilter))
+                 .forEach(game => gameReviewsContainer.appendChild(createGameCard(game, 'main')));
     }
     
-    function reshuffleDisplayedGames() {
-        shuffleArray(allGames);
-        displayedGames = allGames.slice(0, SAMPLE_SIZE);
-        hotGames = displayedGames.slice(0, HOT_GAME_COUNT);
-        mainGames = displayedGames.slice(HOT_GAME_COUNT);
+    function loadNewMainGames() {
+        console.log("Loading new main games, keeping hot games.");
+
+        let unseenGames = allGames.filter(game => !seenGameAppIds.has(game.appId));
+
+        if (unseenGames.length < MAIN_GAME_COUNT) {
+            console.log("Not enough unseen games. Resetting seen list.");
+            // Reset seen list, but keep current games from being immediately reshown
+            seenGameAppIds = new Set([...hotGames, ...mainGames].map(g => g.appId));
+            unseenGames = allGames.filter(game => !seenGameAppIds.has(game.appId));
+            // If still not enough, it means we have less than 100 games total. Just use what we have.
+            if(unseenGames.length === 0) {
+                console.log("All games have been displayed.");
+                return; // or show a message to the user
+            }
+        }
+
+        shuffleArray(unseenGames);
+        const newMainGames = unseenGames.slice(0, MAIN_GAME_COUNT);
+
+        newMainGames.forEach(game => seenGameAppIds.add(game.appId));
+
+        mainGames = newMainGames;
+        displayedGames = [...hotGames, ...mainGames]; // Update the total displayed pool
+
         renderGames(searchInput.value);
-        // Restart the timer since we are reshuffling everything
-        startHotGameTimer(); 
+    }
+
+    function reshuffleHotGames() {
+        console.log("Reshuffling hot games from the current display pool.");
+        
+        // The pool is the currently displayed 50 games
+        let currentPool = [...hotGames, ...mainGames];
+        shuffleArray(currentPool);
+
+        hotGames = currentPool.slice(0, HOT_GAME_COUNT);
+        mainGames = currentPool.slice(HOT_GAME_COUNT);
+
+        renderGames(searchInput.value);
     }
 
     function startHotGameTimer() {
@@ -133,17 +165,13 @@ document.addEventListener('DOMContentLoaded', () => {
             hotGamesTimer.textContent = `${minutes}:${seconds}`;
         };
 
-        updateTimer(); // Initial display
+        updateTimer(); 
 
         timerInterval = setInterval(() => {
             duration--;
             updateTimer();
             if (duration < 0) {
-                // When timer ends, only reshuffle the hot games from the currently displayed set
-                shuffleArray(displayedGames);
-                hotGames = displayedGames.slice(0, HOT_GAME_COUNT);
-                mainGames = displayedGames.slice(HOT_GAME_COUNT);
-                renderGames(searchInput.value);
+                reshuffleHotGames();
                 duration = 600; // Reset timer
             }
         }, 1000);
@@ -151,14 +179,22 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function initialLoad() {
         if (typeof allGames === 'undefined' || typeof translations === 'undefined') {
-            console.error('Game data is not loaded yet! Retrying in 100ms...');
             setTimeout(initialLoad, 100);
             return;
         }
         
+        shuffleArray(allGames);
+        displayedGames = allGames.slice(0, TOTAL_SAMPLE_SIZE);
+        
+        displayedGames.forEach(game => seenGameAppIds.add(game.appId));
+
+        hotGames = displayedGames.slice(0, HOT_GAME_COUNT);
+        mainGames = displayedGames.slice(HOT_GAME_COUNT);
+        
         applyTheme(currentTheme);
-        reshuffleDisplayedGames(); // This now handles the initial game selection and rendering
-        applyLanguage(currentLanguage); // Apply language translations
+        applyLanguage(currentLanguage);
+        renderGames();
+        startHotGameTimer();
     }
 
     // --- Event Listeners ---
@@ -173,11 +209,9 @@ document.addEventListener('DOMContentLoaded', () => {
     window.addEventListener('click', (e) => {
         if (e.target === modal) closeModal();
     });
-    // Refresh button now re-samples the entire game list
-    refreshButton.addEventListener('click', () => {
-        console.log("Full reshuffle requested!");
-        reshuffleDisplayedGames();
-    });
+
+    // Refresh button now only loads new MAIN games, keeping HOT games stable.
+    refreshButton.addEventListener('click', loadNewMainGames);
 
     // --- Initial Load ---
     initialLoad();
