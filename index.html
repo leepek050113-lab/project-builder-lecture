@@ -1,14 +1,27 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Hello World</title>
-  <link href='/style.css' rel='stylesheet'>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Steam Game Reviews</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <h1>Hello, world!</h1>
-  <button onclick="console.log('hello');">Press me</button>
-  <script defer type="text/javascript" src="/main.js"></script>
+    <header>
+        <h1>Steam Game Reviews</h1>
+        <div class="language-switcher">
+            <button id="lang-ko">한국어</button>
+            <button id="lang-en">English</button>
+        </div>
+    </header>
+    <main>
+        <div class="search-container">
+            <input type="text" id="searchInput" placeholder="Search for a game...">
+        </div>
+        <div id="gameReviews" class="reviews-container">
+            <!-- Game review cards will be inserted here -->
+        </div>
+    </main>
+    <script src="main.js"></script>
 </body>
 </html>

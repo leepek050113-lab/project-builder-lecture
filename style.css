@@ -1,1 +1,75 @@
-/* Add styles here */
+:root {
+    --background-color: #1b2838;
+    --header-color: #171a21;
+    --text-color: #c7d5e0;
+    --card-background-color: #2a475e;
+    --accent-color: #66c0f4;
+}
+
+body {
+    background-color: var(--background-color);
+    color: var(--text-color);
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    background-color: var(--header-color);
+    padding: 1rem;
+    text-align: center;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+h1 {
+    color: var(--accent-color);
+    margin: 0;
+}
+
+main {
+    padding: 1rem;
+}
+
+.search-container {
+    margin-bottom: 1rem;
+}
+
+#searchInput {
+    width: 100%;
+    padding: 0.5rem;
+    background-color: var(--card-background-color);
+    color: var(--text-color);
+    border: 1px solid var(--accent-color);
+    border-radius: 4px;
+}
+
+.reviews-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1rem;
+}
+
+/* Placeholder for game-review-card styling */
+game-review-card {
+    background-color: var(--card-background-color);
+    border-radius: 4px;
+    padding: 1rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.language-switcher button {
+    background-color: var(--accent-color);
+    color: var(--header-color);
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-left: 0.5rem;
+}
+
+.language-switcher button.active {
+    background-color: var(--card-background-color);
+    color: var(--accent-color);
+}
