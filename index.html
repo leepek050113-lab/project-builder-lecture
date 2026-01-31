@@ -38,11 +38,12 @@
     <div id="game-modal" class="modal">
         <div class="modal-content">
             <span class="close-button">&times;</span>
-            <img id="modal-game-image" src="" alt="Game Image" class="modal-game-image">
+            <div class="modal-video-container">
+                <iframe id="modal-game-video" width="560" height="315" src="" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            </div>
             <h2 id="modal-game-title"></h2>
-            <div class="modal-game-details">
-                <span id="modal-game-genre"></span>
-                <span id="modal-game-playtime"></span>
+            <div class="modal-tags-container" id="modal-game-tags">
+                <!-- Tags will be inserted here -->
             </div>
             <p id="modal-game-description"></p>
         </div>

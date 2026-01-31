@@ -9,9 +9,11 @@
     --search-bg-light: #fff;
     --search-border-light: #ccc;
     --search-focus-border-light: #6c63ff;
-    --modal-bg-light: rgba(0,0,0,0.5);
+    --modal-bg-light: rgba(0,0,0,0.6);
     --modal-content-bg-light: #fff;
     --hot-section-bg-light: #e9e7ff;
+    --tag-bg-light: #e0e0e0;
+    --tag-text-light: #333;
 
     --background-color-dark: #121212;
     --text-color-dark: #e0e0e0;
@@ -23,9 +25,11 @@
     --search-bg-dark: #2c2c2c;
     --search-border-dark: #555;
     --search-focus-border-dark: #bb86fc;
-    --modal-bg-dark: rgba(0,0,0,0.7);
+    --modal-bg-dark: rgba(0,0,0,0.8);
     --modal-content-bg-dark: #2c2c2c;
     --hot-section-bg-dark: #2a2a3a;
+    --tag-bg-dark: #3e3e3e;
+    --tag-text-dark: #e0e0e0;
 }
 
 body {
@@ -60,7 +64,6 @@ header {
     color: var(--header-text-color-dark);
 }
 
-/* Hot Games Section */
 .hot-games-section {
     background-color: var(--hot-section-bg-light);
     padding: 2rem;
@@ -125,140 +128,18 @@ header {
     justify-content: center;
 }
 
-/* Other styles remain the same */
-
-.header-controls {
-    display: flex;
-    align-items: center;
-}
-
-.language-switcher button {
-    background: none;
-    border: 1px solid var(--header-text-color-light);
-    color: var(--header-text-color-light);
-    padding: 0.5rem 1rem;
-    margin: 0 0.5rem;
-    cursor: pointer;
-    border-radius: 20px;
-    transition: background-color 0.2s, color 0.2s;
-}
-
-.dark-mode .language-switcher button {
-    border-color: var(--header-text-color-dark);
-    color: var(--header-text-color-dark);
-}
-
-.language-switcher button:hover {
-    background-color: var(--header-text-color-light);
-    color: var(--header-bg-color-light);
-}
-
-.dark-mode .language-switcher button:hover {
-    background-color: var(--header-text-color-dark);
-    color: var(--header-bg-color-dark);
-}
-
-#theme-switcher {
-    background: none;
-    border: none;
-    font-size: 1.8rem;
-    cursor: pointer;
-    color: var(--header-text-color-light);
-}
-
-.dark-mode #theme-switcher {
-    color: var(--header-text-color-dark);
-}
-
-#searchInput {
-    width: 60%;
-    max-width: 600px;
-    padding: 1rem;
-    font-size: 1.2rem;
-    border-radius: 30px;
-    border: 1px solid var(--search-border-light);
-    background-color: var(--search-bg-light);
-    color: var(--text-color-light);
-    transition: all 0.3s ease;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-}
-
-.dark-mode #searchInput {
-    border-color: var(--search-border-dark);
-    background-color: var(--search-bg-dark);
-    color: var(--text-color-dark);
-}
-
-#searchInput:focus {
-    outline: none;
-    border-color: var(--search-focus-border-light);
-    box-shadow: 0 0 0 4px rgba(108, 99, 255, 0.2);
-}
-
-.dark-mode #searchInput:focus {
-    border-color: var(--search-focus-border-dark);
-    box-shadow: 0 0 0 4px rgba(187, 134, 252, 0.2);
-}
-
-.reviews-container {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-    gap: 1.5rem;
-    padding: 0 2rem 2rem;
-}
-
-.review-card {
-    background-color: var(--card-bg-color-light);
-    border: 1px solid #ddd;
-    border-radius: 12px;
-    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-    transition: transform 0.2s, box-shadow 0.2s;
-    cursor: pointer;
-    overflow: hidden; /* Ensures the image fits within the card's rounded corners */
-}
-
-.dark-mode .review-card {
-    background-color: var(--card-bg-color-dark);
-    border-color: #333;
-}
-
-.review-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 8px 12px rgba(0,0,0,0.15);
-}
-
-.review-card img {
-    width: 100%;
-    height: 170px; /* Taller image for a better cover look */
-    object-fit: cover; /* Ensures the image covers the area, cropping if necessary */
-    display: block;
-}
-
-
-.review-card-content {
-    padding: 1.5rem;
-}
-
-.review-card-content h2 {
-    font-size: 1.5rem;
-    margin-top: 0;
-    color: var(--header-bg-color-light);
-}
-
-.dark-mode .review-card-content h2 {
-    color: var(--header-text-color-dark);
-}
+/* ... (other styles) ... */
 
 /* Modal Styles */
 .modal {
-    display: none; /* Hidden by default */
-    position: fixed; /* Stay in place */
-    z-index: 1000; /* Sit on top */
+    display: none;
+    position: fixed;
+    z-index: 1000;
     left: 0;
     top: 0;
     width: 100%;
     height: 100%;
-    overflow: auto; /* Enable scroll if needed */
+    overflow: auto;
     background-color: var(--modal-bg-light);
 }
 
@@ -268,10 +149,10 @@ header {
 
 .modal-content {
     background-color: var(--modal-content-bg-light);
-    margin: 10% auto; /* 10% from the top and centered */
+    margin: 5% auto;
     padding: 2rem;
     border-radius: 12px;
-    max-width: 600px;
+    max-width: 800px;
     position: relative;
     box-shadow: 0 5px 15px rgba(0,0,0,0.3);
     animation: fadeIn 0.3s;
@@ -281,46 +162,53 @@ header {
     background-color: var(--modal-content-bg-dark);
 }
 
-@keyframes fadeIn {
-    from {opacity: 0; transform: scale(0.95);}
-    to {opacity: 1; transform: scale(1);}
-}
-
 .close-button {
     color: #aaa;
-    float: right;
+    position: absolute;
+    top: 1rem;
+    right: 1.5rem;
     font-size: 28px;
     font-weight: bold;
     cursor: pointer;
 }
 
-.close-button:hover,
-.close-button:focus {
-    color: #333;
-    text-decoration: none;
-    outline: none;
-}
-
-.dark-mode .close-button:hover,
-.dark-mode .close-button:focus {
-    color: #fff;
-}
-
-.modal-game-image {
+.modal-video-container {
+    position: relative;
     width: 100%;
-    height: 250px;
-    object-fit: cover;
+    padding-bottom: 56.25%; /* 16:9 aspect ratio */
+    margin-bottom: 1.5rem;
+}
+
+.modal-video-container iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
     border-radius: 8px;
+}
+
+.modal-content h2 {
+    font-size: 2.2rem;
     margin-bottom: 1rem;
 }
 
-.modal-game-details {
+.modal-tags-container {
+    margin-bottom: 1rem;
     display: flex;
-    gap: 1rem;
-    margin-bottom: 1rem;
-    color: #555;
+    flex-wrap: wrap;
+    gap: 0.5rem;
 }
 
-.dark-mode .modal-game-details {
-    color: #bbb;
+.tag {
+    background-color: var(--tag-bg-light);
+    color: var(--tag-text-light);
+    padding: 0.4rem 0.8rem;
+    border-radius: 15px;
+    font-size: 0.9rem;
+}
+
+.dark-mode .tag {
+    background-color: var(--tag-bg-dark);
+    color: var(--tag-text-dark);
 }
