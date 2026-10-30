@@ -1,0 +1,87 @@
+<!doctype html><html><body style="margin:0;background:#000">
+<canvas id="c" width="1280" height="720"></canvas>
+<script>
+const S=4, c=document.getElementById('c'), g=c.getContext('2d');
+let seed=7; const rnd=()=>{seed=(seed*16807)%2147483647;return seed/2147483647;};
+const P=(x,y,w,h,col)=>{g.fillStyle=col;g.fillRect(x*S,y*S,w*S,h*S);};
+const T=(s,x,y,col='#e8e2d0',sz=16,al='left')=>{g.font=`bold ${sz}px "DejaVu Sans Mono",monospace`;g.textAlign=al;g.fillStyle='#000';g.fillText(s,x*S+2,y*S+2);g.fillStyle=col;g.fillText(s,x*S,y*S);};
+const frame=(x,y,w,h,edge='#5a5468',fill='#1c1a24')=>{P(x,y,w,h,edge);P(x+1,y+1,w-2,h-2,'#0e0d13');P(x+2,y+2,w-4,h-4,fill);};
+const RAR={C:'#9a9aa6',R:'#3f8cff',E:'#b45cff',L:'#ffc23a'};
+function bg(){P(0,0,320,180,'#121018');for(let i=0;i<220;i++)P((rnd()*320)|0,(rnd()*180)|0,1,1,'#1d1a26');}
+function game(){
+ bg();
+ // field: 2x2 blocks
+ const FX=72,FY=10,FW=176,FH=164,cw=FW/2,ch=FH/2;
+ const hp=[];for(let y=0;y<ch;y++){hp[y]=[];for(let x=0;x<cw;x++)hp[y][x]=y<4?0:1+Math.min(3,(y/18|0))+(rnd()<.08?1:0);}
+ const carve=(cx,cy,r)=>{for(let y=-r;y<=r;y++)for(let x=-r;x<=r;x++)if(x*x+y*y<=r*r){const yy=cy+y,xx=cx+x;if(hp[yy]&&hp[yy][xx]!==undefined)hp[yy][xx]=0;}};
+ // tunnels from bouncing balls
+ const paths=[[44,4,.7,1],[44,4,-.5,1],[44,4,.15,1]];const tips=[];
+ paths.forEach(([x,y,dx,dy],k)=>{let len=[90,70,120][k];for(let i=0;i<len;i++){x+=dx;y+=dy;if(x<1||x>cw-2)dx=-dx;if(y>ch-2||(i%37==36))dy=-dy;carve(Math.round(x),Math.round(y),1);}tips.push([x,y,dx,dy]);});
+ carve(60,46,7);carve(22,30,4); // explosion craters
+ P(FX-3,FY-3,FW+6,FH+6,'#5a5468');P(FX-2,FY-2,FW+4,FH+4,'#0e0d13');
+ P(FX,FY,FW,FH,'#e9e1c8');
+ const shade=['','#3a3540','#26222b','#17141b','#0a080c','#000'];
+ for(let y=0;y<ch;y++)for(let x=0;x<cw;x++){const h=hp[y][x];if(h){P(FX+x*2,FY+y*2,2,2,shade[Math.min(5,h)]);}}
+ // crack sparkle around crater
+ for(let i=0;i<40;i++){const a=rnd()*6.28,r=7+rnd()*3;P(FX+(60+Math.cos(a)*r|0)*2,FY+(46+Math.sin(a)*r|0)*2,1,1,'#ff7a2a');}
+ // balls with trails
+ const cols=['#ff4d5e','#4dd6ff','#ffd84d'];
+ tips.forEach(([x,y,dx,dy],k)=>{for(let t=8;t>0;t--){g.globalAlpha=.08*(9-t);P(FX+Math.round(x-dx*t)*2,FY+Math.round(y-dy*t)*2,2,2,cols[k]);}g.globalAlpha=1;P(FX+Math.round(x)*2,FY+Math.round(y)*2,2,2,cols[k]);});
+ // explosion ball mid-blast
+ P(FX+60*2-1,FY+46*2-1,4,4,'#fff');
+ // drop chute
+ P(FX+FW/2-6,FY-3,12,3,'#7c6f96');P(FX+FW/2-1,FY,2,2,'#7cff6a');T('▼ DROP',FX+FW/2,FY+10,'#7cff6a',14,'center');
+ // left HUD
+ frame(4,10,62,164);
+ T('ROUND',10,22,'#9a92b0',14);T('03',10,34,'#ffffff',30);
+ T('TARGET',10,48,'#9a92b0',14);T('1,200',10,58,'#ffd84d',22);
+ T('SCORE',10,72,'#9a92b0',14);T('860',10,82,'#7cff6a',22);
+ P(10,86,50,4,'#0e0d13');P(10,86,36,4,'#7cff6a');
+ T('TIME',10,100,'#9a92b0',14);T('01:12',10,110,'#ff6a7a',22);
+ T('BLOCK HP',10,124,'#9a92b0',14);T('x1.6',10,134,'#e8e2d0',20);
+ T('GOLD',10,150,'#9a92b0',14);T('34 G',10,160,'#ffc23a',20);
+ // right: ball queue
+ frame(254,10,62,164);T('BALLS',260,22,'#9a92b0',14);
+ const q=[['BASIC','#ff4d5e','C','3/8','ACTIVE'],['DRILL','#4dd6ff','R','5/6','ACTIVE'],['SPARK','#ffd84d','C','2/8','ACTIVE'],['BOMB','#ff7a2a','E','0/5','BOOM'],['BASIC','#ff4d5e','C','8','READY'],['SPLIT','#7cff6a','R','6','READY'],['VOID','#b45cff','L','4','READY']];
+ q.forEach(([n,col,r,b,st],i)=>{const y=28+i*18;P(258,y,54,15,st=='READY'?'#2a2636':'#1a1822');P(258,y,2,15,RAR[r]);P(263,y+5,4,4,col);T(n,270,y+7,'#e8e2d0',12);T('↺'+b,270,y+13,'#9a92b0',11);T(st,310,y+13,st=='READY'?'#7cff6a':'#6b6680',10,'right');});
+ T('[SPACE] DROP 1',260,160,'#e8e2d0',12);T('[A] DROP ALL',260,168,'#e8e2d0',12);
+}
+function card(x,y,w,h,r,title,lines,price,icon){
+ P(x,y,w,h,RAR[r]);P(x+1,y+1,w-2,h-2,'#0e0d13');P(x+2,y+2,w-4,h-4,'#211e2c');
+ P(x+2,y+2,w-4,10,'#2c2838');T(title,x+w/2,y+9,'#ffffff',14,'center');
+ icon(x+w/2,y+26);
+ lines.forEach((l,i)=>T(l,x+w/2,y+46+i*7,'#cfc8dc',12,'center'));
+ P(x+w/2-13,y+h-13,26,9,'#3a3222');T(price+' G',x+w/2,y+h-6,'#ffc23a',14,'center');
+ T({C:'COMMON',R:'RARE',E:'EPIC',L:'LEGENDARY'}[r],x+w-4,y+h-3,RAR[r],10,'right');
+}
+function shop(){
+ bg();
+ T('SHOP · ROUND 3 CLEAR',160,14,'#ffffff',22,'center');
+ T('UPGRADES',8,26,'#9a92b0',14);T('BALLS',8,103,'#9a92b0',14);
+ const up=(col,glyph)=>(cx,cy)=>{P(cx-8,cy-8,16,16,'#0e0d13');P(cx-7,cy-7,14,14,col);T(glyph,cx,cy+3,'#000',22,'center');};
+ card(8,30,72,68,'C','BOUNCE+',['All balls','+1 bounce'],6,up('#7cff6a','+1'));
+ card(86,30,72,68,'R','HEAVY CORE',['Ball damage','+2'],9,up('#ff4d5e','⚔'));
+ card(164,30,72,68,'E','CHAIN FUSE',['BOMB only:','chain +1'],14,up('#ff7a2a','✹'));
+ g.font='bold 11px monospace';P(204,22,32,8,'#ff7a2a');T('BOMB ONLY',220,28,'#fff',12,'center');
+ const ball=(col,ring)=>(cx,cy)=>{P(cx-7,cy-7,14,14,'#0e0d13');for(let y=-6;y<=6;y++)for(let x=-6;x<=6;x++)if(x*x+y*y<=36)P(cx+x,cy+y,1,1,x+y<-5?'#fff':col);if(ring)for(let a=0;a<6.28;a+=.25)P(cx+Math.cos(a)*9|0,cy+Math.sin(a)*9|0,1,1,ring);};
+ card(8,107,72,68,'C','BASIC',['8 bounces','1 dmg'],4,ball('#ff4d5e'));
+ card(86,107,72,68,'R','SPLIT',['Splits in 2','at 0 bounce'],8,ball('#7cff6a'));
+ card(164,107,72,68,'L','VOID',['Erases a','3x3 area','per hit'],22,ball('#b45cff','#ffc23a'));
+ // side panel
+ frame(244,26,72,149);
+ T('GOLD',250,38,'#9a92b0',14);T('34 G',250,49,'#ffc23a',22);
+ P(250,56,60,14,'#3a3450');T('REROLL 2G',280,65,'#ffffff',14,'center');
+ P(250,74,60,14,'#2f5a2a');T('NEXT ▶',280,83,'#ffffff',16,'center');
+ T('OWNED (6/10)',250,100,'#9a92b0',12);
+ [['#ff4d5e','C'],['#4dd6ff','R'],['#ffd84d','C'],['#ff7a2a','E'],['#ff4d5e','C'],['#7cff6a','R']].forEach(([col,r],i)=>{const x=250+(i%4)*15,y=105+(i/4|0)*15;P(x,y,13,13,RAR[r]);P(x+1,y+1,11,11,'#0e0d13');P(x+4,y+4,5,5,col);});
+ T('UPGRADES',250,144,'#9a92b0',12);T('BOUNCE+ x2',250,152,'#e8e2d0',12);T('DMG+ x1',250,159,'#e8e2d0',12);T('LUCK x1',250,166,'#e8e2d0',12);
+}
+function iris(){
+ game();
+ const cx=640,cy=360,r=150;g.fillStyle='#000';g.beginPath();g.rect(0,0,1280,720);g.arc(cx,cy,r,0,Math.PI*2,true);g.fill();
+ // pixelated edge ring
+ for(let a=0;a<6.28;a+=.05){P(((cx+Math.cos(a)*r)/S)|0,((cy+Math.sin(a)*r)/S)|0,1,1,'#000');}
+ T('IRIS OUT → SHOP',160,170,'#e8e2d0',16,'center');
+}
+const m=location.search.slice(1);({game,shop,iris})[m]();
+</script></body></html>
